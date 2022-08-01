@@ -1,0 +1,63 @@
+:root {
+    --uiBg: #ef4444;
+    --searchbarBg: #fecaca;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.topUiContainer {
+    
+    background-color: var(--uiBg);
+
+
+    display:flex;
+    padding: 10px 50px 10px 50px;
+    justify-content: space-between;
+}
+
+.searchForm {
+    display:flex;
+}
+
+.searchBtn {
+    position: relative;
+    right:-30px;
+    background-color: inherit;
+    border: 0;
+    display:flex;
+    padding: 3px;
+}
+
+#searchbar {
+    padding-left: 40px;
+    width: 200px;
+    border-radius: 5px;
+    border-color: inherit;
+    background: var(--searchbarBg);
+    border: 0;
+}
+input {
+    outline: none;
+}
+
+
+.topUiContainer > div > button> img, .searchForm > button> img {
+    width: 24px;
+    color: white;
+}
+
+.topLeftUi, .topRightUi{
+    display:flex;
+    gap: 10px;
+}
+
+.topLeftUi > button , .topRightUi > button {
+    background-color: inherit;
+    border: 0;
+    
+}
