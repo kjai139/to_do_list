@@ -1,6 +1,10 @@
 :root {
     --uiBg: #ef4444;
     --searchbarBg: #fecaca;
+    --hoverBg: #fee2e2;
+    --borderR: 5px;
+    --uiFont: 'Poppins', sans-serif;
+    --contentFont: 'Open Sans', sans-serif;
 }
 
 
@@ -8,6 +12,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+button:hover {
+    border: 1px solid inherit;
+    background-color: var(--hoverBg) !important;
+    cursor: pointer;
 }
 
 .topUiContainer {
@@ -31,6 +41,8 @@
     border: 0;
     display:flex;
     padding: 3px;
+    
+    
 }
 
 #searchbar {
@@ -48,7 +60,7 @@ input {
 
 .topUiContainer > div > button> img, .searchForm > button> img {
     width: 24px;
-    color: white;
+    
 }
 
 .topLeftUi, .topRightUi{
@@ -59,5 +71,13 @@ input {
 .topLeftUi > button , .topRightUi > button {
     background-color: inherit;
     border: 0;
+    padding: 1px;
+    border-radius: var(--borderR);
     
+}
+
+
+.contentContainer {
+    margin-top: 50px;
+    display:flex;
 }
