@@ -185,3 +185,9 @@ input {
 .bottomTaskContainer > button> img {
     width: 16px;
 }
+
+.submitBtnContainer {
+    justify-content: flex-end;
+    display: flex;
+    gap: 5px;
+}

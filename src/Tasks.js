@@ -57,16 +57,34 @@ const addTaskMenu = () => {
 
     dueDateBtn.appendChild(dueDateSvg)
     bottomTaskContainer.appendChild(dueDateBtn)
-    addTaskForm.append(bottomTaskContainer)
+    addTaskForm.appendChild(bottomTaskContainer)
 
-    const projectBtn = document.createElement('button')
+    // const projectBtn = document.createElement('button')
 
 
+
+    
+
+    const submitBtnContainer = document.createElement('div')
+    submitBtnContainer.classList.add('submitBtnContainer')
+
+    const submitBtn = document.createElement('button')
+    submitBtn.setAttribute('id', 'submitBtn')
+    submitBtn.textContent = 'Add Task'
+
+    const cancelBtn = document.createElement('button')
+    cancelBtn.classList.add('cancelBtn')
+    cancelBtn.textContent = 'Cancel'
+
+
+    submitBtnContainer.appendChild(cancelBtn)
+    submitBtnContainer.appendChild(submitBtn)
+
+    addTaskForm.appendChild(submitBtnContainer)
 
     const rightContentContainer = document.querySelector('.rightContentContainer')
 
     rightContentContainer.appendChild(addTaskContainer)
-
 
 
     taskName.select()
