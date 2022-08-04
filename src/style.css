@@ -153,3 +153,35 @@ input {
     color: #d1d5db;
 }
 
+.addTaskContainer {
+    z-index: 9999;
+    position: fixed;
+    left: 400px;
+    top: 80px;
+
+    border: 1px solid black;
+    padding: 10px;
+
+    
+}
+
+#addTaskForm {
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    width: 500px;
+}
+#addTaskForm > input {
+    border:0;
+}
+.bottomTaskContainer {
+    margin-top: 20px;
+}
+.bottomTaskContainer > button {
+    display:flex;
+    background-color: inherit;
+}
+
+.bottomTaskContainer > button> img {
+    width: 16px;
+}
