@@ -21,25 +21,32 @@ class Task {
 
 //add task
 const addTaskMenu = () => {
+
     const addTaskContainer = document.createElement('div')
     addTaskContainer.classList.add('addTaskContainer')
+
 
     const addTaskForm = document.createElement('form')
     addTaskForm.setAttribute('method', 'post')
     addTaskForm.setAttribute('id', 'addTaskForm')
+    addTaskForm.setAttribute('name', 'addTaskForm')
     addTaskContainer.appendChild(addTaskForm)
 
 
-    const taskName = document.createElement('input')
-    taskName.setAttribute('type', 'text')
+    const taskName = document.createElement('textarea')
+    // taskName.setAttribute('type', 'textarea')
+    taskName.classList.add('txtAreas')
     taskName.setAttribute('id', 'taskName')
     taskName.setAttribute('name', 'taskName')
+    taskName.setAttribute('rows', '1')
     taskName.setAttribute('placeholder', 'Task Name')
 
     addTaskForm.appendChild(taskName)
 
-    const taskDescription = document.createElement('input')
-    taskDescription.setAttribute('type', 'text')
+    const taskDescription = document.createElement('textarea')
+    
+    taskDescription.classList.add('txtAreas')
+    taskDescription.setAttribute('rows', '1')
     taskDescription.setAttribute('id', 'taskDescription')
     taskDescription.setAttribute('name', 'taskDescription')
     taskDescription.setAttribute('placeholder', 'Description')
@@ -54,6 +61,7 @@ const addTaskMenu = () => {
     const dueDateSvg = document.createElement('img')
     dueDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
     dueDateBtn.textContent = 'Due Date'
+    dueDateBtn.setAttribute('id', 'dueDateBtn')
 
     dueDateBtn.appendChild(dueDateSvg)
     bottomTaskContainer.appendChild(dueDateBtn)
@@ -86,8 +94,54 @@ const addTaskMenu = () => {
 
     rightContentContainer.appendChild(addTaskContainer)
 
+    //function visible
+
+    let turnVisible = () => {
+        addTaskContainer.classList.add('visible')
+        requestAnimationFrame(turnVisible)
+    }
+    
+    
+
 
     taskName.select()
+
+    //textarea overflow funct
+
+    document.querySelectorAll('.txtAreas').forEach(item => {
+        item.addEventListener('input', function () {
+            // console.log(this.scrollHeight, this.clientHeight)
+            this.style.height = 'auto'
+            if (this.scrollHeight > this.clientHeight){
+                // console.log('true')
+                this.style.height = `${this.scrollHeight}px`
+            } 
+        })
+
+    })
+
+    //remove hidden
+    requestAnimationFrame(turnVisible)
+    
+    //funct to cancel
+
+    const overlay = document.createElement('div')
+    overlay.classList.add('overlay')
+
+    const body = document.querySelector('body')
+
+    body.appendChild(overlay)
+    
+
+    overlay.addEventListener('click', function() {
+        addTaskContainer.classList.add('phaseout')
+        addTaskContainer.addEventListener('transitionend', function(){
+            addTaskContainer.remove()
+            overlay.remove()
+        })
+        
+    })
+
 
 
 }

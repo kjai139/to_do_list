@@ -6,6 +6,9 @@
     --uiFont: 'Poppins', sans-serif;
     --contentFont: 'Open Sans', sans-serif;
     --sidebarBG: #f8fafc;
+
+    --lineHeight: 21px;
+    --borderColor: #e2e8f0;
 }
 
 
@@ -36,7 +39,7 @@ button:hover {
 
     position: fixed;
     width: 100%;
-    z-index: 9999;
+    z-index: 9997;
 }
 
 .searchForm {
@@ -158,10 +161,26 @@ input {
     position: fixed;
     left: 400px;
     top: 80px;
-
-    border: 1px solid black;
+    
+    
+    border: none;
     padding: 10px;
+    transform: scale(0);
+    transition: none;
 
+    border-radius: var(--borderR);
+    
+
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+    
+}
+
+.visible{
+    
+    transform: scale(1);
+    transition: transform 0.2s linear;
+    
     
 }
 
@@ -169,7 +188,7 @@ input {
     display:flex;
     flex-direction:column;
     gap:3px;
-    width: 500px;
+    width: 550px;
 }
 #addTaskForm > input {
     border:0;
@@ -179,7 +198,16 @@ input {
 }
 .bottomTaskContainer > button {
     display:flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
     background-color: inherit;
+    font-family: var(--uiFont);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--borderR);
+}
+#dueDateBtn {
+    color:#34d399;
 }
 
 .bottomTaskContainer > button> img {
@@ -190,4 +218,39 @@ input {
     justify-content: flex-end;
     display: flex;
     gap: 5px;
+}
+
+.txtAreas {
+    resize: none;
+    outline: none;
+    overflow: hidden;
+    border: none;
+    line-height: var(--lineHeight);
+
+    font-family: var(--contentFont);
+    cursor: text;
+
+    
+}
+
+.overlay {
+    left: 1px;
+    top: 1px;
+    position: fixed;
+    z-index: 9998;
+    height: 100%;
+    width: 100%;
+}
+
+.hidden {
+    transform:scale(0);
+}
+
+
+
+.phaseout {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 0.5s, transform 0.5s linear;
 }
