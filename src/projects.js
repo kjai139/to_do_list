@@ -1,4 +1,0 @@
-class Project {
-    constructor(name)
-    
-}
