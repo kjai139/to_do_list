@@ -1,3 +1,5 @@
+import {homePage} from './globalVar'
+
 class Task {
     constructor(
         title = 'Unknown', 
@@ -17,6 +19,9 @@ class Task {
     }
 }    
 
+
+
+
     
     //add task
     const addTaskMenu = (selected) => {
@@ -24,9 +29,13 @@ class Task {
         
         console.log(selected.project)
 
+
+    
+
         const addTaskContainer = document.createElement('div')
         addTaskContainer.classList.add('addTaskContainer')
 
+        
 
         const addTaskForm = document.createElement('form')
         addTaskForm.setAttribute('method', 'post')
@@ -69,7 +78,35 @@ class Task {
         bottomTaskContainer.appendChild(dueDateBtn)
         addTaskForm.appendChild(bottomTaskContainer)
 
-        // const projectBtn = document.createElement('button')
+
+        //proj button
+
+        //working
+        
+        const dropDownMenu = document.createElement('select')
+        dropDownMenu.setAttribute('id', 'dropDownList')
+
+
+        homePage.projectList.forEach(element => {
+            
+            let option = document.createElement('option')
+            let optionDiv = document.createElement('div')
+            let optionImg = document.createElement('img')
+            let optionText = document.createElement('p')
+
+            optionImg.setAttribute('src', `${element.img}`)
+            optionText.textContent = `${element.title}`
+
+            optionDiv.appendChild(optionImg)
+            optionDiv.appendChild(optionText)
+
+            option.appendChild(optionDiv)
+            dropDownMenu.appendChild(option)
+        });
+
+    
+
+        
 
 
 
@@ -83,7 +120,7 @@ class Task {
         submitBtn.textContent = 'Add Task'
 
         const cancelBtn = document.createElement('button')
-        cancelBtn.classList.add('cancelBtn')
+        cancelBtn.setAttribute('id', 'cancelBtn')
         cancelBtn.textContent = 'Cancel'
 
 
@@ -92,9 +129,9 @@ class Task {
 
         addTaskForm.appendChild(submitBtnContainer)
 
-        const rightContentContainer = document.querySelector('.rightContentContainer')
+        // const rightContentContainer = document.querySelector('.rightContentContainer')
 
-        rightContentContainer.appendChild(addTaskContainer)
+        document.body.appendChild(addTaskContainer)
 
         //function visible
 

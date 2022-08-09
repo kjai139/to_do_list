@@ -2,6 +2,11 @@ class Project {
     constructor(name){
         this.tasks =[]
         this.title = name
+        this.img = ''
+    }
+
+    getName = () => {
+        return this.title
     }
     
     addTask = (task) => {

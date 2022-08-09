@@ -158,6 +158,7 @@ input {
 }
 
 .addTaskContainer {
+    background-color: white;
     z-index: 9999;
     position: fixed;
     left: 400px;
@@ -197,7 +198,7 @@ input {
 .bottomTaskContainer {
     margin-top: 20px;
 }
-.bottomTaskContainer > button {
+.bottomTaskContainer > button, #cancelBtn, #submitBtn {
     display:flex;
     padding: 5px;
     justify-content: center;

@@ -1,9 +1,29 @@
-import {Task} from './Tasks.js'
-import Project from './Projects.js'
+import { homePage } from "./globalVar";
+
+const findProject = (projectName) => {
+    let projID = projectName.target.id
+    // console.log(projectName.target.id)
+
+    homePage.projectList.forEach(element => {
+        // console.log(element.getName(),projID )
+        let eleName = element.getName()
+        if (eleName.match(projID)){
+            console.log('match')
+            displayProject(element)
+            return
+        }
+    });
+
+    
+}
+
+
+
+
 
 const displayProject = (proj) => {
 
-    console.log(this)
+    
 
     const contentContainer = document.querySelector('.rightContentContainer')
 
@@ -21,7 +41,7 @@ const displayProject = (proj) => {
 
     contentContainer.appendChild(contentDiv)
 
-    console.log(proj.tasks)
+    // console.log(proj.tasks)
 
     //display tasks
 
@@ -75,4 +95,4 @@ const displayProject = (proj) => {
 
 }
 
-export {displayProject}
+export {displayProject, findProject}
