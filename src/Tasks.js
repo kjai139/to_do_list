@@ -104,8 +104,7 @@ class Task {
             dropDownMenu.appendChild(option)
         });
 
-    
-
+        bottomTaskContainer.appendChild(dropDownMenu)
         
 
 
