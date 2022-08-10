@@ -1,7 +1,7 @@
 import './style.css'
 import {Task, addTaskMenu}  from './Tasks.js'
 import { displayProject, findProject } from './displayContent'
-import Project from './Projects'
+import {Project, addProjectMenu} from './Projects'
 import {homePage} from './globalVar'
 
 
@@ -9,6 +9,9 @@ import {homePage} from './globalVar'
 
 const addTaskBtn = document.querySelector('#addTaskBtn')
 addTaskBtn.addEventListener('click', addTaskMenu)
+
+const addProjBtn = document.querySelector('#addProjBtn')
+addProjBtn.addEventListener('click', addProjectMenu)
 
 
 
@@ -37,3 +40,4 @@ homePage.addProj(testInbox)
 
 inboxBtn.addEventListener('click', findProject)
 
+inboxBtn.click()

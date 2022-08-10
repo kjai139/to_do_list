@@ -10,6 +10,13 @@
     --lineHeight: 21px;
     --borderColor: #e2e8f0;
     --descriptionColor: #cbd5e1;
+
+    --selectedColor: #fee2e2;
+}
+
+.selected {
+    pointer-events: none;
+    background-color: var(--selectedColor) !important;
 }
 
 
@@ -143,6 +150,24 @@ input {
     font-family: var(--uiFont);
 }
 
+#projsideBar {
+    margin-top: 20px;
+}
+
+#addProjForm > div {
+    flex-direction: column;
+    display: flex;
+}
+
+#addProjBtn {
+    justify-content: flex-end;
+    flex-grow: 0;
+}
+
+#addProjBtn > img {
+    width: 20px;
+}
+
 .sidebar > li > button > div {
     display:flex;
     align-items: center;
@@ -156,6 +181,21 @@ input {
 .indicator {
     color: #d1d5db;
 }
+
+.addProjContainer {
+    z-index: 9999;
+    padding:10px;
+    border:none;
+    position: fixed;
+    left: 400px;
+    top: 80px;
+    
+    background-color: white;
+    font-family: var(--uiFont);
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+
 
 .addTaskContainer {
     background-color: white;

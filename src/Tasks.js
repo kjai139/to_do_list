@@ -5,7 +5,7 @@ class Task {
         title = 'Unknown', 
         description = 'Unknown', 
         dueDate ='Unknown',
-        priority = 4,
+        priority = '4',
         checklist = false,
         projectName = ''
         )
@@ -24,10 +24,10 @@ class Task {
 
     
     //add task
-    const addTaskMenu = (selected) => {
+    const addTaskMenu = () => {
     
         
-        console.log(selected.project)
+        
 
 
     
@@ -81,30 +81,14 @@ class Task {
 
         //proj button
 
+        const projectBtn = document.createElement('button')
+        const projectBtnSvg = document.createElement('img')
+
+        
+
         //working
         
-        const dropDownMenu = document.createElement('select')
-        dropDownMenu.setAttribute('id', 'dropDownList')
-
-
-        homePage.projectList.forEach(element => {
-            
-            let option = document.createElement('option')
-            let optionDiv = document.createElement('div')
-            let optionImg = document.createElement('img')
-            let optionText = document.createElement('p')
-
-            optionImg.setAttribute('src', `${element.img}`)
-            optionText.textContent = `${element.title}`
-
-            optionDiv.appendChild(optionImg)
-            optionDiv.appendChild(optionText)
-
-            option.appendChild(optionDiv)
-            dropDownMenu.appendChild(option)
-        });
-
-        bottomTaskContainer.appendChild(dropDownMenu)
+        
         
 
 
@@ -128,7 +112,7 @@ class Task {
 
         addTaskForm.appendChild(submitBtnContainer)
 
-        // const rightContentContainer = document.querySelector('.rightContentContainer')
+        
 
         document.body.appendChild(addTaskContainer)
 

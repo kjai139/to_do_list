@@ -14,6 +14,10 @@ class Home {
             this.projectList.splice(index, 1)
         }
     }
+
+    displayProjSidebar =() => {
+        
+    }
 }
 
 

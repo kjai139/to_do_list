@@ -2,14 +2,24 @@ import { homePage } from "./globalVar";
 
 const findProject = (projectName) => {
     let projID = projectName.target.id
-    // console.log(projectName.target.id)
+    //  console.log(projectName.target)
+
+    
 
     homePage.projectList.forEach(element => {
         // console.log(element.getName(),projID )
+        // console.log(element)
+        let eleId = document.querySelector(`#${element.title}`)
+        // console.log(eleId)
+
+        eleId.classList.remove('selected')
+
+
         let eleName = element.getName()
         if (eleName.match(projID)){
             console.log('match')
             displayProject(element)
+            projectName.target.classList.add('selected')
             return
         }
     });
@@ -26,6 +36,9 @@ const displayProject = (proj) => {
     
 
     const contentContainer = document.querySelector('.rightContentContainer')
+    contentContainer.textContent =''
+
+
 
     const contentDiv = document.createElement('div')
     contentDiv.classList.add('contentDiv')
