@@ -87,7 +87,23 @@ const addProjectMenu = () => {
     option4.classList.add('options')
     
     
-   
+    const projSubmitBtnContainer = document.createElement('div')
+    projSubmitBtnContainer.classList.add('projSubmitBtnContainer')
+
+    const submitBtn = document.createElement('button')
+    submitBtn.setAttribute('id', 'submitBtn')
+    submitBtn.textContent = 'Add project'
+
+    const cancelBtn = document.createElement('button')
+    cancelBtn.setAttribute('id', 'cancelBtn')
+    cancelBtn.textContent = 'Cancel'
+
+    
+    projSubmitBtnContainer.appendChild(cancelBtn)
+    projSubmitBtnContainer.appendChild(submitBtn)
+
+
+
     
     
     
@@ -102,6 +118,8 @@ const addProjectMenu = () => {
     iconDiv.appendChild(iconSelect)
     addProjForm.appendChild(iconDiv)
 
+    addProjForm.appendChild(projSubmitBtnContainer)
+
 
 
 
@@ -110,6 +128,24 @@ const addProjectMenu = () => {
     addProjContainer.appendChild(addProjForm)
 
     document.body.appendChild(addProjContainer)
+
+    //overlay
+
+    const overlay = document.createElement('div')
+        overlay.classList.add('overlay')
+
+
+        document.body.appendChild(overlay)
+        
+
+        overlay.addEventListener('click', function() {
+            addProjContainer.classList.add('phaseout')
+            addProjContainer.addEventListener('transitionend', function(){
+                addProjContainer.remove()
+                overlay.remove()
+            })
+            
+        })
 
 }
 

@@ -1,4 +1,5 @@
 import {homePage} from './globalVar'
+import {createProjDropBtn, displayProjDrop } from './Buttons'
 
 class Task {
     constructor(
@@ -81,12 +82,11 @@ class Task {
 
         //proj button
 
-        const projectBtn = document.createElement('button')
-        const projectBtnSvg = document.createElement('img')
+        requestAnimationFrame(createProjDropBtn)
 
         
 
-        //working
+        
         
         
         

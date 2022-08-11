@@ -162,6 +162,24 @@ input {
 #addProjBtn {
     justify-content: flex-end;
     flex-grow: 0;
+    cursor: pointer;
+}
+
+#projName {
+    padding-left: 5px;
+}
+
+#projName, #iconLabel {
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+}
+
+.projSubmitBtnContainer {
+    flex-direction: row !important;
+    margin-top: 20px;
+    justify-content: flex-end;
+    gap: 5px;
 }
 
 #addProjBtn > img {
@@ -236,7 +254,42 @@ input {
     border:0;
 }
 .bottomTaskContainer {
+    position: relative;
+    display:flex;
     margin-top: 20px;
+}
+
+.projectDropContainer {
+    position: absolute;  
+    left: 60px;
+    top: 35px;
+
+    display: flex;
+    border: 1px solid black;
+    flex-direction: column;
+
+}
+
+.projectDropContainer > ul {
+    
+    list-style-type: none;
+}
+
+.projectDropContainer > ul > li {
+    display:flex;
+    width:200px;
+    justify-content: space-between;
+    
+}
+
+.projectDropContainer > ul > li > div {
+    display:flex;
+    
+    
+}
+
+.projectDropContainer > ul > li > div > img {
+    width: 20px;
 }
 .bottomTaskContainer > button, #cancelBtn, #submitBtn {
     display:flex;
@@ -343,3 +396,4 @@ input {
 .leftTaskContainer, .righttaskContainer {
     padding: 5px;
 }
+
