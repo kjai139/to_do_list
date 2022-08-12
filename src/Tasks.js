@@ -1,5 +1,6 @@
 import {homePage} from './globalVar'
-import {createProjDropBtn, displayProjDrop } from './Buttons'
+import {createProjDropBtn, displayProjDrop } from './buttons'
+import { closeTaskModal } from './modals'
 
 class Task {
     constructor(
@@ -150,19 +151,12 @@ class Task {
         const overlay = document.createElement('div')
         overlay.classList.add('overlay')
 
-        const body = document.querySelector('body')
-
-        body.appendChild(overlay)
         
 
-        overlay.addEventListener('click', function() {
-            addTaskContainer.classList.add('phaseout')
-            addTaskContainer.addEventListener('transitionend', function(){
-                addTaskContainer.remove()
-                overlay.remove()
-            })
-            
-        })
+        document.body.appendChild(overlay)
+        
+
+        overlay.addEventListener('click', closeTaskModal)
 
 
 

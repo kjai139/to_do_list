@@ -47,7 +47,7 @@ button:hover {
 
     position: fixed;
     width: 100%;
-    z-index: 9997;
+    z-index: 9995;
 }
 
 .searchForm {
@@ -217,7 +217,7 @@ input {
 
 .addTaskContainer {
     background-color: white;
-    z-index: 9999;
+    z-index: 9997;
     position: fixed;
     left: 400px;
     top: 80px;
@@ -260,22 +260,53 @@ input {
 }
 
 .projectDropContainer {
+    z-index: 9999;
     position: absolute;  
-    left: 60px;
-    top: 35px;
+    left: 500px;
+    top: 200px;
+
+    cursor:pointer;
 
     display: flex;
-    border: 1px solid black;
+    border: 2px solid var(--borderColor);
     flex-direction: column;
 
 }
 
+.projectDropContainer::after {
+    bottom:100%;
+    left:5%;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-bottom: 5px solid white;
+    content:'';
+    margin-left: -5px;
+}
+
+.projectDropContainer::before {
+    bottom: 100%;
+    left: 5%;
+    position: absolute;
+    height:0;
+    width: 0;
+    border: 8px solid transparent;
+    border-bottom: 8px solid var(--borderColor);
+    margin-left: -8px;
+    content:'';
+}
+
+
+
 .projectDropContainer > ul {
-    
+    z-index: 9999;
     list-style-type: none;
 }
 
 .projectDropContainer > ul > li {
+    
+    z-index: 9999;
     display:flex;
     width:200px;
     justify-content: space-between;
@@ -340,6 +371,15 @@ input {
 }
 
 .overlay {
+    left: 1px;
+    top: 1px;
+    position: fixed;
+    z-index: 9996;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay2 {
     left: 1px;
     top: 1px;
     position: fixed;

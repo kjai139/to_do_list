@@ -17,6 +17,7 @@ const createProjDropBtn = () => {
     dropBtn.setAttribute('id', 'dropBtn')
 
     const dropBtnImg = document.createElement('img')
+    dropBtnImg.setAttribute('id', 'dropBtnImg')
 
 
     dropBtnImg.setAttribute('src', `${homePage.projectList[0].img}`)
@@ -44,7 +45,7 @@ const createProjDropBtn = () => {
 
 const displayProjDrop = (event) => {
 
-    let parentDiv = document.querySelector('.dropBtnDiv')
+    // let parentDiv = document.querySelector('.dropBtnDiv')
 
     event.preventDefault()
 
@@ -52,6 +53,25 @@ const displayProjDrop = (event) => {
     projDropContainer.classList.add('projectDropContainer')
 
     const projDrop = document.createElement('ul')
+
+    const overlay2 = document.createElement('div')
+    overlay2.classList.add('overlay2')
+
+        
+
+    document.body.appendChild(overlay2)
+        
+
+    overlay2.addEventListener('click', function() {
+        projDropContainer.classList.add('phaseout')
+        projDropContainer.addEventListener('transitionend', function(){
+                projDropContainer.remove()
+                overlay2.remove()
+            })
+            
+        })
+
+    
 
     homePage.projectList.forEach(element => {
         let li = document.createElement('li')
@@ -83,13 +103,27 @@ const displayProjDrop = (event) => {
         }
 
         projDrop.appendChild(li)
+        li.addEventListener('click', function(){
+            let dropBtnImg = document.querySelector('#dropBtnImg')
+            dropBtnImg.setAttribute('src', `${element.img}`)
+
+            let dropBtnTxt = document.querySelector('#dropBtnTxt')
+            dropBtnTxt.textContent = `${element.title}`
+
+            console.log('li select')
+        })
+        
 
     })
     projDropContainer.appendChild(projDrop) 
-    parentDiv.appendChild(projDropContainer)  
+    document.body.appendChild(projDropContainer)  
+
+    
 
 
 }
+
+
 
 
 

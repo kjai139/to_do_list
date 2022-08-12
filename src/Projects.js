@@ -1,8 +1,11 @@
+import { homePage } from "./globalVar"
+import { closeProjModal } from "./modals"
+
 class Project {
     constructor(name){
         this.tasks =[]
         this.title = name
-        this.img = ''
+        this.img = './svgs/circle.svg'
         this.priority = '4'
         this.selected = false
     }
@@ -46,6 +49,7 @@ const addProjectMenu = () => {
 
     let addProjNameInput = document.createElement('input')
     addProjNameInput.setAttribute('type', 'text')
+    addProjNameInput.setAttribute('name', 'projName')
     addProjNameInput.setAttribute('id', 'projName')
 
     addProjNameDiv.appendChild(addProjNameLabel)
@@ -64,6 +68,7 @@ const addProjectMenu = () => {
     iconLabel.setAttribute('for', 'iconLabel')
 
     let iconSelect = document.createElement('select')
+    iconSelect.setAttribute('name', 'iconLabel')
     iconSelect.setAttribute('id', 'iconLabel')
 
     let option1 = document.createElement('option')
@@ -93,6 +98,7 @@ const addProjectMenu = () => {
     const submitBtn = document.createElement('button')
     submitBtn.setAttribute('id', 'submitBtn')
     submitBtn.textContent = 'Add project'
+    submitBtn.addEventListener('click', addProjBtnF)
 
     const cancelBtn = document.createElement('button')
     cancelBtn.setAttribute('id', 'cancelBtn')
@@ -138,14 +144,29 @@ const addProjectMenu = () => {
         document.body.appendChild(overlay)
         
 
-        overlay.addEventListener('click', function() {
-            addProjContainer.classList.add('phaseout')
-            addProjContainer.addEventListener('transitionend', function(){
-                addProjContainer.remove()
-                overlay.remove()
-            })
-            
-        })
+        overlay.addEventListener('click', closeProjModal)
+
+}
+
+
+const addProjBtnF = (target) => {
+    target.preventDefault()
+
+    let pForm = new FormData(document.querySelector('#addProjForm'))
+
+    let newP = new Project
+    newP.title = pForm.get('projName')
+    newP.priority = pForm.get('iconLabel')
+
+    homePage.addProj(newP)
+
+    console.log(homePage.projectList)
+    closeProjModal()
+
+
+
+    
+    
 
 }
 
