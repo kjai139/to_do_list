@@ -72,7 +72,7 @@ const addProjectMenu = () => {
     iconSelect.setAttribute('id', 'iconLabel')
 
     let option1 = document.createElement('option')
-    option1.textContent = '1'
+    option1.textContent = '1 (Lowest)'
     option1.setAttribute('value', '1')
     option1.classList.add('options')
 
@@ -88,7 +88,7 @@ const addProjectMenu = () => {
 
     let option4 = document.createElement('option')
     option4.setAttribute('value', '4')
-    option4.textContent = '4'
+    option4.textContent = '4 (Highest)'
     option4.classList.add('options')
     
     
@@ -103,6 +103,7 @@ const addProjectMenu = () => {
     const cancelBtn = document.createElement('button')
     cancelBtn.setAttribute('id', 'cancelBtn')
     cancelBtn.textContent = 'Cancel'
+    cancelBtn.addEventListener('click', closeProjModal)
 
     
     projSubmitBtnContainer.appendChild(cancelBtn)
@@ -167,6 +168,17 @@ const addProjBtnF = (target) => {
 
     
     
+
+}
+
+const showProjectSide =() => {
+    let projArrow = document.querySelector('#projArrow')
+
+    homePage.forEach(element => {
+        let li = document.createElement('li')
+        let btn = document.createElement('button')
+
+    });
 
 }
 
