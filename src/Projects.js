@@ -5,8 +5,8 @@ class Project {
     constructor(name){
         this.tasks =[]
         this.title = name
-        this.img = './svgs/circle.svg'
-        this.priority = '4'
+        this.img = './svgs/circle-p1.svg'
+        this.priority = '1'
         this.selected = false
     }
 
@@ -51,6 +51,8 @@ const addProjectMenu = () => {
     addProjNameInput.setAttribute('type', 'text')
     addProjNameInput.setAttribute('name', 'projName')
     addProjNameInput.setAttribute('id', 'projName')
+    addProjNameInput.setAttribute('required', '')
+    
 
     addProjNameDiv.appendChild(addProjNameLabel)
     addProjNameDiv.appendChild(addProjNameInput)
@@ -103,7 +105,12 @@ const addProjectMenu = () => {
     const cancelBtn = document.createElement('button')
     cancelBtn.setAttribute('id', 'cancelBtn')
     cancelBtn.textContent = 'Cancel'
-    cancelBtn.addEventListener('click', closeProjModal)
+    
+    cancelBtn.addEventListener('click', function(event){
+        event.preventDefault()
+        closeProjModal()
+    })
+        
 
     
     projSubmitBtnContainer.appendChild(cancelBtn)
@@ -151,18 +158,57 @@ const addProjectMenu = () => {
 
 
 const addProjBtnF = (target) => {
-    target.preventDefault()
+    let projDisplay = document.querySelector('#projDisplay')
+    let projArrow = document.querySelector('#projArrow')
+    let addp = document.querySelector('#addProjForm')
+    if (addp.checkValidity()) {
+        target.preventDefault()
+        let pForm = new FormData(document.querySelector('#addProjForm'))
+        
 
-    let pForm = new FormData(document.querySelector('#addProjForm'))
+        let newP = new Project
+        newP.title = pForm.get('projName')
+        newP.priority = pForm.get('iconLabel')
 
-    let newP = new Project
-    newP.title = pForm.get('projName')
-    newP.priority = pForm.get('iconLabel')
+        console.log(newP.priority)
 
-    homePage.addProj(newP)
+        if (newP.priority === '2'){
+            newP.img = './svgs/circle-p2.svg'
+        } else if (newP.priority === '3') {
+            newP.img = './svgs/circle-p3.svg'
+        } else if (newP.priority === '4') {
+            newP.img = './svgs/circle-p4.svg'
+        }
+        console.log(newP.img)
+        homePage.addProj(newP)
+        if (projArrow.classList.contains('toggleOn')){
+                let li = document.createElement('li')
+                let btn = document.createElement('button')
+                let btnDiv = document.createElement('div')
+        
+                let divImg = document.createElement('img')
+        
+                divImg.setAttribute('src', `${newP.img}`)
+                divImg.classList.add(`p${newP.priority}`)
+        
+                btnDiv.appendChild(divImg)
+                btnDiv.appendChild(document.createTextNode(`${newP.title}`))
+        
+                btn.appendChild(btnDiv)
+                li.appendChild(btn)
+        
+                projDisplay.appendChild(li)
 
-    console.log(homePage.projectList)
-    closeProjModal()
+        }
+
+        
+
+        
+        closeProjModal()
+
+    }
+
+    
 
 
 
@@ -172,14 +218,47 @@ const addProjBtnF = (target) => {
 }
 
 const showProjectSide =() => {
+
     let projArrow = document.querySelector('#projArrow')
+    let parentUl = document.querySelector('.sidebar')
 
-    homePage.forEach(element => {
-        let li = document.createElement('li')
-        let btn = document.createElement('button')
+    let projDisplay = document.querySelector('#projDisplay')
 
-    });
+    if (projArrow.classList.contains('toggleOn')){
+        projDisplay.textContent =''
+        projArrow.classList.remove('toggleOn')
+    } else {
+        homePage.projectList.forEach(element => {
+            if (element.title != 'Inbox') {
+                let li = document.createElement('li')
+                let btn = document.createElement('button')
+                let btnDiv = document.createElement('div')
+        
+                let divImg = document.createElement('img')
+        
+                divImg.setAttribute('src', `${element.img}`)
+                divImg.classList.add(`p${element.priority}`)
+        
+                btnDiv.appendChild(divImg)
+                btnDiv.appendChild(document.createTextNode(`${element.title}`))
+        
+                btn.appendChild(btnDiv)
+                li.appendChild(btn)
+        
+                projDisplay.appendChild(li)
+
+            }
+            
+    
+    
+    
+        });
+        projArrow.classList.add('toggleOn')
+
+    }
+
+    
 
 }
 
-export {Project, addProjectMenu}
+export {Project, addProjectMenu, showProjectSide}

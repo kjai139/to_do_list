@@ -1,7 +1,7 @@
 import './style.css'
 import {Task, addTaskMenu}  from './Tasks.js'
 import { displayProject, findProject } from './displayContent'
-import {Project, addProjectMenu} from './Projects'
+import {Project, addProjectMenu, showProjectSide} from './Projects'
 import {homePage} from './globalVar'
 
 
@@ -13,7 +13,8 @@ addTaskBtn.addEventListener('click', addTaskMenu)
 const addProjBtn = document.querySelector('#addProjBtn')
 addProjBtn.addEventListener('click', addProjectMenu)
 
-
+const projDisplay = document.querySelector('#Projects')
+projDisplay.addEventListener('click', showProjectSide)
 
 //testing for styling
 const testInbox = new Project('Inbox')

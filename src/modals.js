@@ -1,5 +1,5 @@
 const closeProjModal = (target) => {
-    target.preventDefault()
+    
     let addProjContainer = document.querySelector('.addProjContainer')
     let overlay = document.querySelector('.overlay')
     addProjContainer.classList.add('phaseout')
