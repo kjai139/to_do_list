@@ -1,5 +1,6 @@
 import { homePage } from "./globalVar"
 import { closeProjModal } from "./modals"
+import {findProject} from "./displayContent"
 
 class Project {
     constructor(name){
@@ -52,10 +53,15 @@ const addProjectMenu = () => {
     addProjNameInput.setAttribute('name', 'projName')
     addProjNameInput.setAttribute('id', 'projName')
     addProjNameInput.setAttribute('required', '')
+    addProjNameInput.setAttribute('autocomplete', 'off')
+
+    let addProjNameHelp = document.createElement('p')
+    addProjNameHelp.classList.add('help')
     
 
     addProjNameDiv.appendChild(addProjNameLabel)
     addProjNameDiv.appendChild(addProjNameInput)
+    addProjNameDiv.appendChild(addProjNameHelp)
 
     addProjForm.appendChild(addProjNameDiv)
 
@@ -156,12 +162,40 @@ const addProjectMenu = () => {
 
 }
 
+const checkProjExist = () => {
+    let projN = document.querySelector('#projName')
+    let projHelp = document.querySelector('.help')
+
+    let result = true
+
+    homePage.projectList.forEach(element => {
+        console.log(element.title, projN.value)
+        if (element.title === projN.value){
+            console.log('returning false')
+            projHelp.classList.add('invalid')
+            projHelp.textContent = 'Project name already exists'
+            projN.classList.add('redBorder')
+            result = false
+        }
+    });
+    if (result == false) {
+        return false
+    } else {
+        return true
+    }
+
+    
+}
+
 
 const addProjBtnF = (target) => {
     let projDisplay = document.querySelector('#projDisplay')
     let projArrow = document.querySelector('#projArrow')
     let addp = document.querySelector('#addProjForm')
-    if (addp.checkValidity()) {
+
+    console.log(checkProjExist())
+    if (addp.checkValidity() && checkProjExist() ) {
+        
         target.preventDefault()
         let pForm = new FormData(document.querySelector('#addProjForm'))
         
@@ -184,6 +218,8 @@ const addProjBtnF = (target) => {
         if (projArrow.classList.contains('toggleOn')){
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
+
+                btn.setAttribute('id', `${newP.title}`)
                 let btnDiv = document.createElement('div')
         
                 let divImg = document.createElement('img')
@@ -193,7 +229,8 @@ const addProjBtnF = (target) => {
         
                 btnDiv.appendChild(divImg)
                 btnDiv.appendChild(document.createTextNode(`${newP.title}`))
-        
+                
+                btn.addEventListener('click', findProject)
                 btn.appendChild(btnDiv)
                 li.appendChild(btn)
         
@@ -206,6 +243,8 @@ const addProjBtnF = (target) => {
         
         closeProjModal()
 
+    } else {
+        target.preventDefault()
     }
 
     
@@ -218,9 +257,9 @@ const addProjBtnF = (target) => {
 }
 
 const showProjectSide =() => {
-
+    
     let projArrow = document.querySelector('#projArrow')
-    let parentUl = document.querySelector('.sidebar')
+    
 
     let projDisplay = document.querySelector('#projDisplay')
 
@@ -232,6 +271,9 @@ const showProjectSide =() => {
             if (element.title != 'Inbox') {
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
+
+                btn.setAttribute('id', `${element.title}`)
+
                 let btnDiv = document.createElement('div')
         
                 let divImg = document.createElement('img')
@@ -241,9 +283,13 @@ const showProjectSide =() => {
         
                 btnDiv.appendChild(divImg)
                 btnDiv.appendChild(document.createTextNode(`${element.title}`))
-        
+
+
+                btn.addEventListener('click', findProject)
                 btn.appendChild(btnDiv)
                 li.appendChild(btn)
+
+            
         
                 projDisplay.appendChild(li)
 

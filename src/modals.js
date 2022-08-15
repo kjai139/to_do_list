@@ -11,7 +11,7 @@ const closeProjModal = (target) => {
 
 
 const closeTaskModal =(target) => {
-    target.preventDefault()
+    
     let addTaskContainer = document.querySelector('.addTaskContainer')
     let overlay = document.querySelector('.overlay')
     addTaskContainer.classList.add('phaseout')
@@ -20,6 +20,8 @@ const closeTaskModal =(target) => {
                 overlay.remove()
             })
 }
+
+
 
 
 export {closeProjModal, closeTaskModal}

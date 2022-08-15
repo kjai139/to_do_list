@@ -7,6 +7,21 @@ import { homePage } from "./globalVar"
 
 const createProjDropBtn = () => {
 
+    let selection = document.querySelector('.selected') !=null
+
+    let selectedProj 
+
+    if (selection == false){
+        selectedProj = document.querySelector('#contentTitle').textContent
+        console.log(selectedProj)
+        
+    } else {
+        selectedProj = document.querySelector('.selected').id
+        console.log(selectedProj)
+    }
+
+    
+
     let dropBtnDiv = document.createElement('div')
     dropBtnDiv.classList.add('dropBtnDiv')
     
@@ -19,12 +34,21 @@ const createProjDropBtn = () => {
     const dropBtnImg = document.createElement('img')
     dropBtnImg.setAttribute('id', 'dropBtnImg')
 
-
-    dropBtnImg.setAttribute('src', `${homePage.projectList[0].img}`)
-
     const dropBtnTxt = document.createElement('p')
-    dropBtnTxt.setAttribute('id', 'dropBtnTxt')
-    dropBtnTxt.textContent = `${homePage.projectList[0].title}`
+
+    homePage.projectList.forEach(element => {
+        if (element.title == selectedProj){
+            dropBtnImg.setAttribute('src', `${element.img}`)
+
+            
+            dropBtnTxt.setAttribute('id', 'dropBtnTxt')
+            dropBtnTxt.textContent = `${element.title}`
+        }
+        
+    });
+
+
+    
 
     dropBtn.appendChild(dropBtnImg)
     dropBtn.appendChild(dropBtnTxt)
@@ -111,6 +135,8 @@ const displayProjDrop = (event) => {
             dropBtnTxt.textContent = `${element.title}`
 
             console.log('li select')
+            projDropContainer.remove()
+            overlay2.remove()
         })
         
 

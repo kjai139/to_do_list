@@ -1,6 +1,7 @@
 import {homePage} from './globalVar'
 import {createProjDropBtn, displayProjDrop } from './buttons'
 import { closeTaskModal } from './modals'
+import { displayProject } from './displayContent'
 
 class Task {
     constructor(
@@ -73,10 +74,15 @@ class Task {
         const dueDateBtn = document.createElement('button')
         const dueDateSvg = document.createElement('img')
         dueDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
-        dueDateBtn.textContent = 'Due Date'
+
+        const dueDateTxt = document.createElement('p')
+        dueDateTxt.textContent = 'Due Date'
         dueDateBtn.setAttribute('id', 'dueDateBtn')
 
+        
+
         dueDateBtn.appendChild(dueDateSvg)
+        dueDateBtn.appendChild(dueDateTxt)
         bottomTaskContainer.appendChild(dueDateBtn)
         addTaskForm.appendChild(bottomTaskContainer)
 
@@ -102,10 +108,12 @@ class Task {
         const submitBtn = document.createElement('button')
         submitBtn.setAttribute('id', 'submitBtn')
         submitBtn.textContent = 'Add Task'
+        submitBtn.addEventListener('click', addTask)
 
         const cancelBtn = document.createElement('button')
         cancelBtn.setAttribute('id', 'cancelBtn')
         cancelBtn.textContent = 'Cancel'
+        cancelBtn.addEventListener('click', closeTaskModal)
 
 
         submitBtnContainer.appendChild(cancelBtn)
@@ -159,6 +167,53 @@ class Task {
         overlay.addEventListener('click', closeTaskModal)
 
 
+
+    }
+
+    
+
+    const addTask = (element) => {
+        let addT = document.querySelector('#addTaskForm')
+        
+        let projLocation = document.querySelector('#dropBtnTxt').textContent
+
+        if (addT.checkValidity()){
+            element.preventDefault()
+
+            let nTask = new FormData(document.querySelector('#addTaskForm'))
+
+            let addTask = new Task
+            addTask.title = nTask.get('taskName')
+            addTask.description = nTask.get('taskDescription')
+
+            homePage.projectList.forEach(element => {
+                if (element.title == projLocation) {
+                    element.tasks.push(addTask)
+                    closeTaskModal()
+
+                    let selection = document.querySelector('.selected') !=null
+
+                    let selectedProj 
+
+                    if (selection == false){
+                        selectedProj = document.querySelector('#contentTitle').textContent
+                        
+                    } else {
+                        selectedProj = document.querySelector('.selected').id
+                    }
+
+                    
+                    if (selectedProj == element.title){
+                        displayProject(element)
+                        return
+
+                    }
+                    
+                }
+            });
+
+
+        }
 
     }
 

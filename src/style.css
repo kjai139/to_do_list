@@ -14,14 +14,27 @@
     --selectedColor: #fee2e2;
 }
 
+.help {
+    display: none;
+}
+
+.redBorder {
+    border: 1px solid red !important;
+}
+
+
+.help.invalid {
+    display:flex;
+    color: red;
+    font-size: 10px;
+}
+
 .selected {
     pointer-events: none;
     background-color: var(--selectedColor) !important;
 }
 
-.p1 {
-    fill: #34d399 !important;
-}
+
 
 * {
     box-sizing: border-box;
@@ -251,6 +264,28 @@ input {
     
 }
 
+.addTaskDiv {
+    gap:10px;
+    display:flex;
+    font-family: var(--contentFont);
+    color: gray;
+}
+
+.addTaskDiv:hover {
+    color:#f87171;
+    cursor: pointer;
+    
+}
+
+.addTaskDiv:hover img {
+    border: 2px solid #f87171;
+}
+
+.addTaskDiv > img {
+    width:24px;
+    border-radius: 50%;
+}
+
 #addTaskForm {
     display:flex;
     flex-direction:column;
@@ -261,6 +296,7 @@ input {
     border:0;
 }
 .bottomTaskContainer {
+    gap:10px;
     position: relative;
     display:flex;
     margin-top: 20px;
@@ -309,6 +345,7 @@ input {
 .projectDropContainer > ul {
     z-index: 9999;
     list-style-type: none;
+    background-color: white;
 }
 
 .projectDropContainer > ul > li {
@@ -339,8 +376,12 @@ input {
     border: 1px solid var(--borderColor);
     border-radius: var(--borderR);
 }
-#dueDateBtn {
-    color:#34d399;
+#projDisplay > li > button > * {
+    pointer-events: none;
+}
+
+.sidebar > li > button > * {
+    pointer-events: none;
 }
 
 #taskDateBtn {
@@ -425,6 +466,7 @@ input {
 
 .taskDiv {
     display:flex;
+    gap: 10px;
 }
 
 #taskDateBtn > img {
@@ -440,7 +482,7 @@ input {
     color: var(--descriptionColor);
 }
 
-.leftTaskContainer, .righttaskContainer {
-    padding: 5px;
+.leftTaskContainer {
+    padding: 0;
 }
 

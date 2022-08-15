@@ -1,4 +1,5 @@
 import { homePage } from "./globalVar";
+import { addTaskMenu } from "./Tasks";
 
 const findProject = (projectName) => {
     let projID = projectName.target.id
@@ -47,6 +48,7 @@ const displayProject = (proj) => {
     
 
     const contentTitle = document.createElement('h2')
+    contentTitle.setAttribute('id', 'contentTitle')
     contentTitle.textContent = `${proj.title}`
 
     contentTitleDiv.appendChild(contentTitle)
@@ -56,55 +58,76 @@ const displayProject = (proj) => {
 
     // console.log(proj.tasks)
 
-    //display tasks
+    if (proj.tasks.length === 0) {
+        let addTaskDiv = document.createElement('div')
+        addTaskDiv.classList.add('addTaskDiv')
 
-    proj.tasks.forEach(element => {
-        console.log(element)
-        let taskContainer = document.createElement('div')
-        taskContainer.classList.add('taskDiv')
+        let addTaskImg = document.createElement('img')
+        addTaskImg.setAttribute('src', './svgs/btn_svgs/task-plus.svg')
 
-        let leftTaskContainer = document.createElement('div')
-        leftTaskContainer.classList.add('leftTaskContainer')
+        let addTaskMsg = document.createElement('p')
+        addTaskMsg.textContent = 'Add task'
 
-        let taskCheckInput = document.createElement('input')
-        taskCheckInput.setAttribute('type', 'checkbox')
-        taskCheckInput.classList.add('checkbox')
+        addTaskDiv.appendChild(addTaskImg)
+        addTaskDiv.appendChild(addTaskMsg)
 
-        leftTaskContainer.appendChild(taskCheckInput)
+        addTaskDiv.addEventListener('click', addTaskMenu )
 
-        let rightTaskContainer = document.createElement('div')
-        rightTaskContainer.classList.add('rightTaskContainer')
+        contentDiv.appendChild(addTaskDiv)
+    } else {
+        //display tasks
 
-        let taskTitle = document.createElement('p')
-        taskTitle.classList.add('taskTitle')
-        taskTitle.textContent = `${element.title}`
+        proj.tasks.forEach(element => {
+            console.log(element)
+            let taskContainer = document.createElement('div')
+            taskContainer.classList.add('taskDiv')
 
-        let taskDescription = document.createElement('p')
-        taskDescription.classList.add('taskDescription')
+            let leftTaskContainer = document.createElement('div')
+            leftTaskContainer.classList.add('leftTaskContainer')
 
-        taskDescription.textContent = `${element.description}`
+            let taskCheckInput = document.createElement('input')
+            taskCheckInput.setAttribute('type', 'checkbox')
+            taskCheckInput.classList.add('checkbox')
 
-        let taskDateBtn = document.createElement('button')
-        taskDateBtn.setAttribute('id', 'taskDateBtn')
+            leftTaskContainer.appendChild(taskCheckInput)
 
-        let taskDateSvg = document.createElement('img')
-        taskDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
+            let rightTaskContainer = document.createElement('div')
+            rightTaskContainer.classList.add('rightTaskContainer')
 
-        taskDateBtn.appendChild(taskDateSvg)
+            let taskTitle = document.createElement('p')
+            taskTitle.classList.add('taskTitle')
+            taskTitle.textContent = `${element.title}`
 
-        let taskDateTxt = document.createElement('p')
-        taskDateTxt.textContent =`${element.dueDate}`
+            let taskDescription = document.createElement('p')
+            taskDescription.classList.add('taskDescription')
 
-        rightTaskContainer.appendChild(taskTitle)
-        rightTaskContainer.appendChild(taskDescription)
-        rightTaskContainer.appendChild(taskDateBtn)
+            taskDescription.textContent = `${element.description}`
 
-        taskContainer.appendChild(leftTaskContainer)
-        taskContainer.appendChild(rightTaskContainer)
+            let taskDateBtn = document.createElement('button')
+            taskDateBtn.setAttribute('id', 'taskDateBtn')
 
-        contentDiv.appendChild(taskContainer)
-    });
+            let taskDateSvg = document.createElement('img')
+            taskDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
 
+            taskDateBtn.appendChild(taskDateSvg)
+
+            let taskDateTxt = document.createElement('p')
+            taskDateTxt.textContent =`${element.dueDate}`
+
+            rightTaskContainer.appendChild(taskTitle)
+            rightTaskContainer.appendChild(taskDescription)
+            rightTaskContainer.appendChild(taskDateBtn)
+
+            taskContainer.appendChild(leftTaskContainer)
+            taskContainer.appendChild(rightTaskContainer)
+
+            contentDiv.appendChild(taskContainer)
+        });
+
+
+    }
+
+    
 
 }
 

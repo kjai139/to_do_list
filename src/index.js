@@ -7,14 +7,16 @@ import {homePage} from './globalVar'
 
 
 
-const addTaskBtn = document.querySelector('#addTaskBtn')
-addTaskBtn.addEventListener('click', addTaskMenu)
+const addTaskModal = document.querySelector('#addTaskBtn')
+addTaskModal.addEventListener('click', addTaskMenu)
 
 const addProjBtn = document.querySelector('#addProjBtn')
 addProjBtn.addEventListener('click', addProjectMenu)
 
 const projDisplay = document.querySelector('#Projects')
 projDisplay.addEventListener('click', showProjectSide)
+
+
 
 //testing for styling
 const testInbox = new Project('Inbox')
