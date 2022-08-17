@@ -13,6 +13,8 @@
 
     --selectedColor: #fee2e2;
     --calenderGray: #cbd5e1;
+
+    --pastDate: #e2e8f0;
 }
 
 .help {
@@ -491,6 +493,8 @@ input {
     list-style-type: none;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
+    padding-left: 10px;
+    padding-right:10px;
 }
 
 .calenderContainer > div > ul > li {
@@ -526,6 +530,7 @@ input {
 .calenderTop {
     font-weight: bold;
     justify-content: space-between;
+    align-items: center;
 }
 .calenderTop, .arrowDiv, .calenderDaysLabel, .calenderBottom {
     display:flex;
@@ -550,4 +555,45 @@ input {
     align-items: center;
     justify-content: center;
     width: calc(250px/8);
+}
+
+.calenderBottom {
+    flex-wrap: wrap;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+}
+
+.pastDate {
+    color: var(--pastDate);
+}
+
+.dateSelected {
+    
+    
+    border: 5px solid red !important;
+    background-color: red !important;
+}
+
+.calenderBottom > div {
+    border-radius: 50%;
+    border: 5px solid transparent;
+    background-color: transparent;
+}
+
+.calenderBottom > div:hover {
+    
+    
+    border: 5px solid gray;
+    background-color: gray;
+}
+
+.arrowDiv > div:hover {
+    background: gray;
+}
+.arrowDiv > div {
+    padding: 5px;
+}
+
+.monthYearDisplay, .arrowDiv {
+    padding:5px;
 }

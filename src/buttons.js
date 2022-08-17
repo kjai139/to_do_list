@@ -1,4 +1,5 @@
 import { homePage } from "./globalVar"
+import { addMonths } from "date-fns"
 
 
 
@@ -155,13 +156,39 @@ const createCalender = (loc) => {
     let curMonth = todayDate.getMonth()
     let curYear = todayDate.getFullYear()
 
+    let monthCounter = 2
+
     let lastDay = new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, 0).getDate()
-    console.log(lastDay)
+
+    
+    
+    let lastMonthLastDay = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDate()
+
+    let lastMonthLastDaySub = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDate()
+
+    
+
+    let lastMonthLastDayIndex = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDay()
+
+    let firstDayOfMonthIndex = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0)
+
+    let todayDay = todayDate.getDate()
+
+    
+
+    // console.log(lastMonthLastDayIndex)
+    // console.log(firstDayOfMonthIndex)
+    // console.log(todayDay)
+    // console.log(curMonth)
+    
+
 
     let week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
     let month = ['January', 'February', 'March','April','May','June', 'July','August','September','October','November','December']
 
+    let newMonth = curMonth 
+    let newYear = curYear
 
 
     loc.appendChild(calenderDiv)
@@ -174,6 +201,7 @@ const createCalender = (loc) => {
     calenderDiv.appendChild(calenderTop)
 
     const monthYearDisplayDiv = document.createElement('div')
+    monthYearDisplayDiv.classList.add('monthYearDisplay')
     monthYearDisplayDiv.textContent = `${month[curMonth]} ${curYear}`
 
     calenderTop.appendChild(monthYearDisplayDiv)
@@ -193,6 +221,11 @@ const createCalender = (loc) => {
     rightArrowImg.classList.add('rightArrowImg')
     rightArrowImg.setAttribute('src', './svgs/btn_svgs/rightarrow.svg')
     rightArrow.appendChild(rightArrowImg)
+
+    
+
+
+
     arrowDiv.appendChild(rightArrow)
 
     calenderTop.appendChild(arrowDiv)
@@ -217,11 +250,85 @@ const createCalender = (loc) => {
     calenderBottom.classList.add('calenderBottom')
     calenderDiv.appendChild(calenderBottom)
 
+    for (let l = 0; lastMonthLastDayIndex >= l; l++){
+        let ydiv = document.createElement('div')
+        ydiv.classList.add('pastDate')
+        lastMonthLastDaySub -= lastMonthLastDayIndex - l
+        ydiv.textContent = `${lastMonthLastDaySub}`
+    
+        calenderBottom.appendChild(ydiv)
+    }
+
+    let displayMonthAndYear = monthYearDisplayDiv.textContent.split(' ')
+    let selectedMonth = displayMonthAndYear[0]
+    let selectedYear = displayMonthAndYear[1]
+
+    console.log(month[curMonth], selectedMonth, curYear, selectedYear)
+
     for (let y = 0; y < lastDay; y++){
         let ydiv = document.createElement('div')
+        if (month[curMonth] == selectedMonth && curYear == selectedYear) {
+            if (todayDay > y+1) {
+                ydiv.classList.add('pastDate')
+            } else if (todayDay == y+1) {
+                ydiv.classList.add('dateSelected')
+            }
+
+        }
+       
         ydiv.textContent = `${y+1}`
         calenderBottom.appendChild(ydiv)
     }
+
+    
+    
+    
+
+    //next month funct
+    rightArrow.addEventListener('click', () => {
+
+        let nextMonthLastDayIndex = new Date(todayDate.getFullYear(), todayDate.getMonth() + monthCounter, 0).getDay()
+
+        console.log(new Date(todayDate.getFullYear(), todayDate.getMonth() + monthCounter - 1, 0).getDay())
+        console.log(nextMonthLastDayIndex)
+
+        console.log(new Date(todayDate.getFullYear(), todayDate.getMonth()+ monthCounter, 0).getDay())
+
+        let nextMonthLastDay = new Date(todayDate.getFullYear(), todayDate.getMonth() + monthCounter, 0).getDate()
+
+        let lastMonthLastDay = new Date(todayDate.getFullYear(), todayDate.getMonth() + monthCounter -1 , 0).getDay()
+
+        let lastMonthLastDayDate = new Date(todayDate.getFullYear(), todayDate.getMonth() + monthCounter -1 , 0).getDate()
+
+        let newCurMonth = addMonths(new Date(), monthCounter - 1).getMonth()
+
+        let newCurYear = addMonths(new Date(), monthCounter - 1).getFullYear()
+        
+        console.log(lastMonthLastDay)
+        monthYearDisplayDiv.textContent = `${month[newCurMonth]} ${newCurYear}`
+       
+        calenderBottom.textContent = ''
+
+        for (let l = 0; lastMonthLastDay >= l; l++){
+            let ydiv = document.createElement('div')
+            
+            
+            ydiv.textContent = `${lastMonthLastDayDate - lastMonthLastDay + l}`
+            
+        
+            calenderBottom.appendChild(ydiv)
+        }
+
+        for (let y = 0; y < nextMonthLastDay; y++){
+            let ydiv = document.createElement('div')
+            
+           
+            ydiv.textContent = `${y+1}`
+            calenderBottom.appendChild(ydiv)
+        }
+
+        monthCounter += 1
+    })
 
 }
 
