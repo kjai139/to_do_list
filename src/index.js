@@ -4,6 +4,8 @@ import { displayProject, findProject } from './displayContent'
 import {Project, addProjectMenu, showProjectSide} from './Projects'
 import {homePage} from './globalVar'
 
+import { displayDueDateDrop } from './buttons'
+
 
 
 
@@ -44,3 +46,5 @@ homePage.addProj(testInbox)
 inboxBtn.addEventListener('click', findProject)
 
 inboxBtn.click()
+
+displayDueDateDrop()

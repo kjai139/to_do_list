@@ -12,6 +12,7 @@
     --descriptionColor: #cbd5e1;
 
     --selectedColor: #fee2e2;
+    --calenderGray: #cbd5e1;
 }
 
 .help {
@@ -486,3 +487,67 @@ input {
     padding: 0;
 }
 
+.calenderContainer > div > ul {
+    list-style-type: none;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.calenderContainer > div > ul > li {
+    justify-content: space-between;
+}
+
+.calenderContainer > div > ul > li, .calenderContainer > div > ul > li > div {
+    display:flex;
+    align-items: center;
+    
+}
+.calenderContainer > div > ul > li > div {
+    gap:5px;
+
+}
+
+.calenderSvgs {
+    width: 16px;
+}
+.calenderContainer {
+    font-size: 14px;
+    font-family: var(--contentFont);
+    position: fixed;
+    width: 250px;
+    top:300px;
+    left:500px;
+}
+
+.leftArrowImg, .rightArrowImg {
+    width: 16px;
+}
+
+.calenderTop {
+    font-weight: bold;
+    justify-content: space-between;
+}
+.calenderTop, .arrowDiv, .calenderDaysLabel, .calenderBottom {
+    display:flex;
+}
+
+.calenderTop, .calenderDaysLabel, .calenderBottom{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.calenderDaysLabel > div {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    width: calc(250px/8);
+    
+}
+
+.calenderBottom > div {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(250px/8);
+}

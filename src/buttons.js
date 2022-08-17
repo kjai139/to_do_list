@@ -149,8 +149,192 @@ const displayProjDrop = (event) => {
 
 }
 
+const createCalender = (loc) => {  
+    const calenderDiv = document.createElement('div')
+    let todayDate = new Date()
+    let curMonth = todayDate.getMonth()
+    let curYear = todayDate.getFullYear()
+
+    let lastDay = new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, 0).getDate()
+    console.log(lastDay)
+
+    let week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+    let month = ['January', 'February', 'March','April','May','June', 'July','August','September','October','November','December']
+
+
+
+    loc.appendChild(calenderDiv)
+
+
+
+    const calenderTop = document.createElement('div')
+    calenderTop.classList.add('calenderTop')
+
+    calenderDiv.appendChild(calenderTop)
+
+    const monthYearDisplayDiv = document.createElement('div')
+    monthYearDisplayDiv.textContent = `${month[curMonth]} ${curYear}`
+
+    calenderTop.appendChild(monthYearDisplayDiv)
+
+    const arrowDiv = document.createElement('div')
+    arrowDiv.classList.add('arrowDiv')
+
+    const leftArrow = document.createElement('div')
+    const leftArrowImg = document.createElement('img')
+    leftArrowImg.setAttribute('src', './svgs/btn_svgs/leftarrow.svg')
+    leftArrow.appendChild(leftArrowImg)
+    leftArrowImg.classList.add('leftArrowImg')
+    arrowDiv.appendChild(leftArrow)
+
+    const rightArrow = document.createElement('div')
+    const rightArrowImg = document.createElement('img')
+    rightArrowImg.classList.add('rightArrowImg')
+    rightArrowImg.setAttribute('src', './svgs/btn_svgs/rightarrow.svg')
+    rightArrow.appendChild(rightArrowImg)
+    arrowDiv.appendChild(rightArrow)
+
+    calenderTop.appendChild(arrowDiv)
+
+    const calenderDaysLabel = document.createElement('div')
+    calenderDaysLabel.classList.add('calenderDaysLabel')
+
+    
+
+
+    for (let x = 0; x < 7; x++) {
+        let xdiv = document.createElement('div')
+        xdiv.textContent = `${week[x][0]}`
+
+        calenderDaysLabel.appendChild(xdiv)
+
+    }
+
+    calenderDiv.appendChild(calenderDaysLabel)
+
+    const calenderBottom = document.createElement('div')
+    calenderBottom.classList.add('calenderBottom')
+    calenderDiv.appendChild(calenderBottom)
+
+    for (let y = 0; y < lastDay; y++){
+        let ydiv = document.createElement('div')
+        ydiv.textContent = `${y+1}`
+        calenderBottom.appendChild(ydiv)
+    }
+
+}
+
+const displayDueDateDrop = () => {
+    const calenderContainer = document.createElement('div')
+    calenderContainer.classList.add('calenderContainer')
+
+    const topPartUlContainer = document.createElement('div')
+    calenderContainer.appendChild(topPartUlContainer)
+
+
+    const topPartUl = document.createElement('ul')
+    topPartUlContainer.appendChild(topPartUl)
+
+    const tmwLi = document.createElement('li')
+    topPartUl.appendChild(tmwLi)
+    const tmwLeft = document.createElement('div')
+
+    const tmwImg = document.createElement('img')
+    tmwImg.setAttribute('src', './svgs/btn_svgs/calender.svg')
+    tmwImg.classList.add('calenderSvgs')
+    const tmwTxt = document.createElement('p')
+    tmwTxt.textContent = 'Today'
+
+    tmwLeft.appendChild(tmwImg)
+    tmwLeft.appendChild(tmwTxt)
+
+    const tmwRight = document.createElement('div')
+    const tmwRightTxt = document.createElement('p')
+    tmwRightTxt.textContent = '1'
+
+    tmwRight.appendChild(tmwRightTxt)
+
+    tmwLi.appendChild(tmwLeft)
+    tmwLi.appendChild(tmwRight)
+
+    //2
+    const tmwLi2 = document.createElement('li')
+    topPartUl.appendChild(tmwLi2)
+    const tmwLeft2 = document.createElement('div')
+
+    const tmwImg2 = document.createElement('img')
+    tmwImg2.classList.add('calenderSvgs')
+    tmwImg2.setAttribute('src', './svgs/btn_svgs/tomorrow.svg')
+    const tmwTxt2 = document.createElement('p')
+    tmwTxt2.textContent = 'Tomorrow'
+
+    tmwLeft2.appendChild(tmwImg2)
+    tmwLeft2.appendChild(tmwTxt2)
+
+    const tmwRight2 = document.createElement('div')
+    const tmwRightTxt2 = document.createElement('p')
+    tmwRightTxt2.textContent = '1'
+
+    tmwRight2.appendChild(tmwRightTxt2)
+
+    tmwLi2.appendChild(tmwLeft2)
+    tmwLi2.appendChild(tmwRight2)
+    //3
+    const tmwLi3 = document.createElement('li')
+    topPartUl.appendChild(tmwLi3)
+    const tmwLeft3 = document.createElement('div')
+
+    const tmwImg3 = document.createElement('img')
+    tmwImg3.classList.add('calenderSvgs')
+    tmwImg3.setAttribute('src', './svgs/btn_svgs/weekend.svg')
+    const tmwTxt3 = document.createElement('p')
+    tmwTxt3.textContent = 'This weekend'
+
+    tmwLeft3.appendChild(tmwImg3)
+    tmwLeft3.appendChild(tmwTxt3)
+
+    const tmwRight3 = document.createElement('div')
+    const tmwRightTxt3 = document.createElement('p')
+    tmwRightTxt3.textContent = '1'
+
+    tmwRight3.appendChild(tmwRightTxt3)
+
+    tmwLi3.appendChild(tmwLeft3)
+    tmwLi3.appendChild(tmwRight3)
+    //4
+    const tmwLi4 = document.createElement('li')
+    topPartUl.appendChild(tmwLi4)
+    const tmwLeft4 = document.createElement('div')
+
+    const tmwImg4 = document.createElement('img')
+    tmwImg4.classList.add('calenderSvgs')
+    tmwImg4.setAttribute('src', './svgs/btn_svgs/next-week.svg')
+    const tmwTxt4 = document.createElement('p')
+    tmwTxt4.textContent = 'Tomorrow'
+
+    tmwLeft4.appendChild(tmwImg4)
+    tmwLeft4.appendChild(tmwTxt4)
+
+    const tmwRight4 = document.createElement('div')
+    const tmwRightTxt4 = document.createElement('p')
+    tmwRightTxt4.textContent = ''
+
+    tmwRight4.appendChild(tmwRightTxt4)
+
+    tmwLi4.appendChild(tmwLeft4)
+    tmwLi4.appendChild(tmwRight4)
+
+    document.body.appendChild(calenderContainer)
+
+    createCalender(calenderContainer)
+    
+
+    
+
+}
 
 
 
 
-export {createProjDropBtn, displayProjDrop}
+export {createProjDropBtn, displayProjDrop, displayDueDateDrop}
