@@ -20,6 +20,7 @@ projDisplay.addEventListener('click', showProjectSide)
 
 
 
+
 //testing for styling
 const testInbox = new Project('Inbox')
 testInbox.img = './svgs/sidebar_svgs/inbox-outline.svg'
@@ -47,4 +48,4 @@ inboxBtn.addEventListener('click', findProject)
 
 inboxBtn.click()
 
-displayDueDateDrop()
+

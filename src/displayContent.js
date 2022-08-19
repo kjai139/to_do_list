@@ -10,10 +10,18 @@ const findProject = (projectName) => {
     homePage.projectList.forEach(element => {
         // console.log(element.getName(),projID )
         // console.log(element)
-        let eleId = document.querySelector(`#${element.title}`)
+        let eleId
+        if (document.querySelector(`#${element.title}`) != null){
+            eleId = document.querySelector(`#${element.title}`)
+            eleId.classList.remove('selected')
+        }
+        
+
+        
+        
         // console.log(eleId)
 
-        eleId.classList.remove('selected')
+        
 
 
         let eleName = element.getName()

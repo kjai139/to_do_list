@@ -2,6 +2,7 @@ import {homePage} from './globalVar'
 import {createProjDropBtn, displayProjDrop } from './buttons'
 import { closeTaskModal } from './modals'
 import { displayProject } from './displayContent'
+import {displayDueDateDrop} from './buttons.js'
 
 class Task {
     constructor(
@@ -78,6 +79,7 @@ class Task {
         const dueDateTxt = document.createElement('p')
         dueDateTxt.textContent = 'Due Date'
         dueDateBtn.setAttribute('id', 'dueDateBtn')
+        dueDateBtn.addEventListener('click', displayDueDateDrop)
 
         
 
@@ -113,7 +115,12 @@ class Task {
         const cancelBtn = document.createElement('button')
         cancelBtn.setAttribute('id', 'cancelBtn')
         cancelBtn.textContent = 'Cancel'
-        cancelBtn.addEventListener('click', closeTaskModal)
+        cancelBtn.addEventListener('click', function(event){
+            
+            event.preventDefault()
+            closeTaskModal()
+           
+        })
 
 
         submitBtnContainer.appendChild(cancelBtn)

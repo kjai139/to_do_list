@@ -490,11 +490,14 @@ input {
 }
 
 .calenderContainer > div > ul {
+    
     list-style-type: none;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-top: 1px solid var(--calenderGray);
+    border-bottom: 1px solid var(--calenderGray);
     padding-left: 10px;
     padding-right:10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .calenderContainer > div > ul > li {
@@ -515,12 +518,15 @@ input {
     width: 16px;
 }
 .calenderContainer {
+    z-index: 9999;
     font-size: 14px;
     font-family: var(--contentFont);
     position: fixed;
     width: 250px;
     top:300px;
     left:500px;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .leftArrowImg, .rightArrowImg {
@@ -559,12 +565,17 @@ input {
 
 .calenderBottom {
     flex-wrap: wrap;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--calenderGray);
     padding-bottom: 5px;
 }
 
+.nondisplay {
+    pointer-events: none;
+    color: white;
+}
 .pastDate {
     color: var(--pastDate);
+    pointer-events: none;
 }
 
 .dateSelected {
