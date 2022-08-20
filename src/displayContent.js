@@ -1,5 +1,6 @@
 import { homePage } from "./globalVar";
 import { addTaskMenu } from "./Tasks";
+import { format } from "date-fns";
 
 const findProject = (projectName) => {
     let projID = projectName.target.id
@@ -121,6 +122,8 @@ const displayProject = (proj) => {
 
             let taskDateTxt = document.createElement('p')
             taskDateTxt.textContent =`${element.dueDate}`
+
+            taskDateBtn.appendChild(taskDateTxt)
 
             rightTaskContainer.appendChild(taskTitle)
             rightTaskContainer.appendChild(taskDescription)

@@ -15,6 +15,12 @@
     --calenderGray: #cbd5e1;
 
     --pastDate: #e2e8f0;
+
+    --graytxt: #d1d5db;
+}
+
+.grayDisplay {
+    color: var(--graytxt);
 }
 
 .help {
@@ -49,11 +55,13 @@ body {
     display:flex;
 }
 
-button:hover {
+button:hover, .calenderBtns:hover {
     border: 1px solid inherit;
     background-color: var(--hoverBg) !important;
     cursor: pointer;
 }
+
+
 
 .toggleOn {
     transform: rotate(90deg);
@@ -123,6 +131,8 @@ input {
 
 
 .contentContainer {
+    display: flex;
+    width: 90%;
     margin-top: 46px;
 }
 
@@ -267,6 +277,11 @@ input {
     
 }
 
+.taskDiv {
+    padding: 10px;
+    border-bottom: 1px solid var(--borderColor);
+}
+
 .addTaskDiv {
     gap:10px;
     display:flex;
@@ -389,7 +404,7 @@ input {
 
 #taskDateBtn {
     display: flex;
-    padding: 5px;
+    padding:5px;
     justify-content: center;
     align-items: center;
     background-color: inherit;
@@ -449,7 +464,7 @@ input {
     transform: scale(0);
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 1s, opacity 0.5s, transform 0.5s linear;
+    transition: visibility 0s 0.5s, opacity 0.5s, transform 0.5s linear;
 }
 
 /* page content */
@@ -462,7 +477,19 @@ input {
     font-family: var(--contentFont);
 }
 
+.rightTaskContainer {
+    
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rightTaskContainer > * {
+    margin-bottom: 5px;
+}
+
 .rightContentContainer {
+
+    flex-grow: 1;
     margin-left: 320px;
     padding:30px;
 }
@@ -474,6 +501,10 @@ input {
 
 #taskDateBtn > img {
     width: 16px;
+}
+
+#taskDateBtn > p {
+    font-size: 12px;
 }
 
 .taskTitle {
@@ -523,8 +554,9 @@ input {
     font-family: var(--contentFont);
     position: fixed;
     width: 250px;
-    top:300px;
-    left:500px;
+    top: 190px;
+    left: 410px;
+    background-color: white;
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }

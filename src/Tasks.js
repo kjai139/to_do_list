@@ -8,7 +8,7 @@ class Task {
     constructor(
         title = 'Unknown', 
         description = 'Unknown', 
-        dueDate ='Unknown',
+        dueDate = '',
         priority = '4',
         checklist = false,
         projectName = ''
@@ -77,8 +77,10 @@ class Task {
         dueDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
 
         const dueDateTxt = document.createElement('p')
+        dueDateTxt.setAttribute('id', 'ddTxt')
         dueDateTxt.textContent = 'Due Date'
         dueDateBtn.setAttribute('id', 'dueDateBtn')
+        dueDateBtn.setAttribute('name', 'dueDate')
         dueDateBtn.addEventListener('click', displayDueDateDrop)
 
         
@@ -192,6 +194,8 @@ class Task {
             let addTask = new Task
             addTask.title = nTask.get('taskName')
             addTask.description = nTask.get('taskDescription')
+            addTask.dueDate = document.querySelector('#dueDateBtn').value
+            
 
             homePage.projectList.forEach(element => {
                 if (element.title == projLocation) {

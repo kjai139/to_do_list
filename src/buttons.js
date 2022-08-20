@@ -1,5 +1,7 @@
 import { homePage } from "./globalVar"
-import { addMonths, subMonths, compareAsc, getDaysInMonth, lastDayOfMonth } from "date-fns"
+import { addMonths, subMonths, compareAsc, format, lastDayOfMonth, nextSaturday } from "date-fns"
+
+import { chooseToday, chooseTomorrow } from "./calender"
 
 
 
@@ -162,7 +164,7 @@ const createCalender = (loc) => {
 
     
     
-    let lastMonthLastDay = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDate()
+    
 
     let lastMonthLastDaySub = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDate()
 
@@ -170,7 +172,7 @@ const createCalender = (loc) => {
 
     let lastMonthLastDayIndex = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDay()
 
-    let firstDayOfMonthIndex = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0)
+    
 
     let todayDay = todayDate.getDate()
 
@@ -299,7 +301,7 @@ const createCalender = (loc) => {
 
         selectedDate = addMonths(selectedDate, 1)
         
-        let daysInSelectedDate = getDaysInMonth(selectedDate)
+        
         let selectedDateMinusOne = subMonths(selectedDate, 1)
         
 
@@ -465,6 +467,8 @@ const displayDueDateDrop = (target) => {
     topPartUlContainer.appendChild(topPartUl)
 
     const tmwLi = document.createElement('li')
+    tmwLi.classList.add('calenderBtns')
+    
     topPartUl.appendChild(tmwLi)
     const tmwLeft = document.createElement('div')
 
@@ -479,15 +483,18 @@ const displayDueDateDrop = (target) => {
 
     const tmwRight = document.createElement('div')
     const tmwRightTxt = document.createElement('p')
+    tmwRightTxt.classList.add('grayDisplay')
     tmwRightTxt.textContent = '1'
 
     tmwRight.appendChild(tmwRightTxt)
 
     tmwLi.appendChild(tmwLeft)
     tmwLi.appendChild(tmwRight)
+    tmwLi.addEventListener('click', chooseToday)
 
     //2
     const tmwLi2 = document.createElement('li')
+    tmwLi2.classList.add('calenderBtns')
     topPartUl.appendChild(tmwLi2)
     const tmwLeft2 = document.createElement('div')
 
@@ -502,14 +509,17 @@ const displayDueDateDrop = (target) => {
 
     const tmwRight2 = document.createElement('div')
     const tmwRightTxt2 = document.createElement('p')
+    tmwRightTxt2.classList.add('grayDisplay')
     tmwRightTxt2.textContent = '1'
 
     tmwRight2.appendChild(tmwRightTxt2)
 
     tmwLi2.appendChild(tmwLeft2)
     tmwLi2.appendChild(tmwRight2)
+    tmwLi2.addEventListener('click', chooseTomorrow)
     //3
     const tmwLi3 = document.createElement('li')
+    tmwLi3.classList.add('calenderBtns')
     topPartUl.appendChild(tmwLi3)
     const tmwLeft3 = document.createElement('div')
 
@@ -517,14 +527,15 @@ const displayDueDateDrop = (target) => {
     tmwImg3.classList.add('calenderSvgs')
     tmwImg3.setAttribute('src', './svgs/btn_svgs/weekend.svg')
     const tmwTxt3 = document.createElement('p')
-    tmwTxt3.textContent = 'This weekend'
+    tmwTxt3.textContent = 'Coming weekend'
 
     tmwLeft3.appendChild(tmwImg3)
     tmwLeft3.appendChild(tmwTxt3)
 
     const tmwRight3 = document.createElement('div')
     const tmwRightTxt3 = document.createElement('p')
-    tmwRightTxt3.textContent = '1'
+    tmwRightTxt3.classList.add('grayDisplay')
+    tmwRightTxt3.textContent = `${format(nextSaturday(new Date()), 'eee MMM dd')}`
 
     tmwRight3.appendChild(tmwRightTxt3)
 
@@ -532,6 +543,7 @@ const displayDueDateDrop = (target) => {
     tmwLi3.appendChild(tmwRight3)
     //4
     const tmwLi4 = document.createElement('li')
+    tmwLi4.classList.add('calenderBtns')
     topPartUl.appendChild(tmwLi4)
     const tmwLeft4 = document.createElement('div')
 
@@ -539,7 +551,7 @@ const displayDueDateDrop = (target) => {
     tmwImg4.classList.add('calenderSvgs')
     tmwImg4.setAttribute('src', './svgs/btn_svgs/next-week.svg')
     const tmwTxt4 = document.createElement('p')
-    tmwTxt4.textContent = 'Tomorrow'
+    tmwTxt4.textContent = 'Next week'
 
     tmwLeft4.appendChild(tmwImg4)
     tmwLeft4.appendChild(tmwTxt4)
@@ -562,7 +574,20 @@ const displayDueDateDrop = (target) => {
 
 }
 
+const adjustDate = () => {
+    let selection = document.querySelector('.selected') !=null
 
+    let selectedProj 
+
+    if (selection == false){
+        selectedProj = document.querySelector('#contentTitle').textContent
+        console.log(selectedProj)
+        
+    } else {
+        selectedProj = document.querySelector('.selected').id
+        console.log(selectedProj)
+    }
+}
 
 
 export {createProjDropBtn, displayProjDrop, displayDueDateDrop}
