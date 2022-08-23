@@ -1,7 +1,7 @@
 import {homePage} from './globalVar'
 import {createProjDropBtn, displayProjDrop } from './buttons'
 import { closeTaskModal } from './modals'
-import { displayProject } from './displayContent'
+import { displayProject, displayAddTaskIcon } from './displayContent'
 import {displayDueDateDrop} from './buttons.js'
 
 class Task {
@@ -55,6 +55,7 @@ class Task {
         taskName.setAttribute('name', 'taskName')
         taskName.setAttribute('rows', '1')
         taskName.setAttribute('placeholder', 'Task Name')
+        taskName.setAttribute('required', 'yes')
 
         addTaskForm.appendChild(taskName)
 
@@ -214,7 +215,7 @@ class Task {
                     }
 
                     
-                    if (selectedProj == element.title){
+                    if (selectedProj == element.id || selectedProj == element.title){
                         displayProject(element)
                         return
 
@@ -228,8 +229,39 @@ class Task {
 
     }
 
+    const removeTask = (target) => {
+        let selectedProj = document.querySelector('#contentTitle').textContent
 
-export {Task, addTaskMenu}
+        let selectedTask = target.target.name
+
+        let selectedTaskTitle = document.querySelector(`#${selectedTask}`).textContent
+
+        let selectedDescription = document.querySelector(`#${selectedTask}d`).textContent
+
+        console.log(selectedTask, selectedDescription)
+
+        homePage.projectList.forEach(element => {
+            if (element.title == selectedProj) {
+                console.log('eletitle match selected proj')
+                element.tasks.forEach(ele => {
+                    console.log(ele)
+                    if (selectedTaskTitle == ele.title && selectedDescription == ele.description ){
+                        console.log('tasks matched for removal')
+                        element.removeTask(ele)
+                        let selectedDiv = document.querySelector(`#${selectedTask}div`)
+
+                        selectedDiv.remove()
+                        if (element.tasks.length == 0) {
+                            displayAddTaskIcon()
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+export {Task, addTaskMenu, removeTask}
 
     
 

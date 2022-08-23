@@ -9,10 +9,15 @@ class Project {
         this.img = './svgs/circle-p1.svg'
         this.priority = '1'
         this.selected = false
+        this.id = 'Inbox'
     }
 
     getName = () => {
         return this.title
+    }
+
+    getId = () => {
+        return this.id
     }
     
     addTask = (task) => {
@@ -20,6 +25,16 @@ class Project {
             console.log('obj alrdy exist')
         } else {
             this.tasks.push(task)
+        }
+    }
+
+    removeTask = (task) => {
+        if (this.tasks.includes(task)){
+
+            let taskIndex = this.tasks.indexOf(task)
+            this.tasks.splice(taskIndex, 1)
+
+            console.log(this.tasks)
         }
     }
    
@@ -52,7 +67,7 @@ const addProjectMenu = () => {
     addProjNameInput.setAttribute('type', 'text')
     addProjNameInput.setAttribute('name', 'projName')
     addProjNameInput.setAttribute('id', 'projName')
-    addProjNameInput.setAttribute('required', '')
+    addProjNameInput.setAttribute('required', 'yes')
     addProjNameInput.setAttribute('autocomplete', 'off')
 
     let addProjNameHelp = document.createElement('p')
@@ -107,6 +122,12 @@ const addProjectMenu = () => {
     submitBtn.setAttribute('id', 'submitBtn')
     submitBtn.textContent = 'Add project'
     submitBtn.addEventListener('click', addProjBtnF)
+    addProjContainer.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter'){
+            submitBtn.click()
+        }
+    })
+    
 
     const cancelBtn = document.createElement('button')
     cancelBtn.setAttribute('id', 'cancelBtn')
@@ -193,6 +214,8 @@ const addProjBtnF = (target) => {
     let projArrow = document.querySelector('#projArrow')
     let addp = document.querySelector('#addProjForm')
 
+    
+
     console.log(checkProjExist())
     if (addp.checkValidity() && checkProjExist() ) {
         
@@ -203,8 +226,9 @@ const addProjBtnF = (target) => {
         let newP = new Project
         newP.title = pForm.get('projName')
         newP.priority = pForm.get('iconLabel')
+        newP.id = `idn${homePage.projectList.length + 1}`
 
-        console.log(newP.priority)
+        
 
         if (newP.priority === '2'){
             newP.img = './svgs/circle-p2.svg'
@@ -219,7 +243,7 @@ const addProjBtnF = (target) => {
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
 
-                btn.setAttribute('id', `${newP.title}`)
+                btn.setAttribute('id', `${newP.id}`)
                 let btnDiv = document.createElement('div')
         
                 let divImg = document.createElement('img')
@@ -245,6 +269,10 @@ const addProjBtnF = (target) => {
 
     } else {
         target.preventDefault()
+        let helpMsg = document.querySelector('.help')
+
+        helpMsg.textContent = 'Please enter a project name'
+        helpMsg.classList.add('invalid')
     }
 
     
@@ -272,7 +300,7 @@ const showProjectSide =() => {
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
 
-                btn.setAttribute('id', `${element.title}`)
+                btn.setAttribute('id', `${element.id}`)
 
                 let btnDiv = document.createElement('div')
         

@@ -1,7 +1,7 @@
 import { homePage } from "./globalVar"
 import { addMonths, subMonths, compareAsc, format, lastDayOfMonth, nextSaturday } from "date-fns"
 
-import { chooseToday, chooseTomorrow } from "./calender"
+import { chooseComingWeekend, chooseNextWeek, chooseNoDate, chooseToday, chooseTomorrow } from "./calender"
 
 
 
@@ -40,7 +40,7 @@ const createProjDropBtn = () => {
     const dropBtnTxt = document.createElement('p')
 
     homePage.projectList.forEach(element => {
-        if (element.title == selectedProj){
+        if (element.title == selectedProj || element.id == selectedProj){
             dropBtnImg.setAttribute('src', `${element.img}`)
 
             
@@ -90,11 +90,10 @@ const displayProjDrop = (event) => {
         
 
     overlay2.addEventListener('click', function() {
-        projDropContainer.classList.add('phaseout')
-        projDropContainer.addEventListener('transitionend', function(){
+        
                 projDropContainer.remove()
                 overlay2.remove()
-            })
+            
             
         })
 
@@ -449,11 +448,10 @@ const displayDueDateDrop = (target) => {
         
 
     overlay2.addEventListener('click', function() {
-        calenderContainer.classList.add('phaseout')
-        calenderContainer.addEventListener('transitionend', function(){
+       
                 calenderContainer.remove()
                 overlay2.remove()
-            })
+          
             
         })
 
@@ -537,6 +535,8 @@ const displayDueDateDrop = (target) => {
     tmwRightTxt3.classList.add('grayDisplay')
     tmwRightTxt3.textContent = `${format(nextSaturday(new Date()), 'eee MMM dd')}`
 
+    tmwLi3.addEventListener('click', chooseComingWeekend)
+
     tmwRight3.appendChild(tmwRightTxt3)
 
     tmwLi3.appendChild(tmwLeft3)
@@ -558,12 +558,43 @@ const displayDueDateDrop = (target) => {
 
     const tmwRight4 = document.createElement('div')
     const tmwRightTxt4 = document.createElement('p')
-    tmwRightTxt4.textContent = ''
+    tmwRightTxt4.textContent = `${format(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 7), 'eee MMM dd')}`
+    tmwRightTxt4.classList.add('grayDisplay')
+
+    tmwLi4.addEventListener('click', chooseNextWeek)
 
     tmwRight4.appendChild(tmwRightTxt4)
 
     tmwLi4.appendChild(tmwLeft4)
     tmwLi4.appendChild(tmwRight4)
+    //5
+    const tmwLi5 = document.createElement('li')
+    tmwLi5.classList.add('calenderBtns')
+    topPartUl.appendChild(tmwLi5)
+    const tmwLeft5 = document.createElement('div')
+
+    const tmwImg5 = document.createElement('img')
+    tmwImg5.classList.add('calenderSvgs')
+    tmwImg5.setAttribute('src', './svgs/btn_svgs/cancel.svg')
+    const tmwTxt5 = document.createElement('p')
+    tmwTxt5.textContent = 'No due date'
+
+    tmwLeft5.appendChild(tmwImg5)
+    tmwLeft5.appendChild(tmwTxt5)
+
+    const tmwRight5 = document.createElement('div')
+    const tmwRightTxt5 = document.createElement('p')
+    tmwRightTxt5.classList.add('grayDisplay')
+    tmwRightTxt5.textContent = ''
+
+    tmwLi5.addEventListener('click', chooseNoDate)
+
+    tmwRight5.appendChild(tmwRightTxt5)
+
+    tmwLi5.appendChild(tmwLeft5)
+    tmwLi5.appendChild(tmwRight5)
+
+    //
 
     document.body.appendChild(calenderContainer)
 

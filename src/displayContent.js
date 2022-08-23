@@ -1,10 +1,11 @@
 import { homePage } from "./globalVar";
-import { addTaskMenu } from "./Tasks";
+import { addTaskMenu, removeTask } from "./Tasks";
 import { format } from "date-fns";
+import { expandTaskModal } from "./modals";
 
 const findProject = (projectName) => {
     let projID = projectName.target.id
-    //  console.log(projectName.target)
+    console.log('proj name id', projectName.target.id)
 
     
 
@@ -12,9 +13,11 @@ const findProject = (projectName) => {
         // console.log(element.getName(),projID )
         // console.log(element)
         let eleId
-        if (document.querySelector(`#${element.title}`) != null){
-            eleId = document.querySelector(`#${element.title}`)
+        if (document.querySelector(`#${element.id}`) != null){
+            eleId = document.querySelector(`#${element.id}`)
             eleId.classList.remove('selected')
+
+            console.log(eleId, 'removed')
         }
         
 
@@ -25,7 +28,7 @@ const findProject = (projectName) => {
         
 
 
-        let eleName = element.getName()
+        let eleName = element.getId()
         if (eleName.match(projID)){
             console.log('match')
             displayProject(element)
@@ -65,50 +68,44 @@ const displayProject = (proj) => {
 
     contentContainer.appendChild(contentDiv)
 
-    // console.log(proj.tasks)
+    console.log(proj.tasks, proj.tasks.length)
 
     if (proj.tasks.length === 0) {
-        let addTaskDiv = document.createElement('div')
-        addTaskDiv.classList.add('addTaskDiv')
-
-        let addTaskImg = document.createElement('img')
-        addTaskImg.setAttribute('src', './svgs/btn_svgs/task-plus.svg')
-
-        let addTaskMsg = document.createElement('p')
-        addTaskMsg.textContent = 'Add task'
-
-        addTaskDiv.appendChild(addTaskImg)
-        addTaskDiv.appendChild(addTaskMsg)
-
-        addTaskDiv.addEventListener('click', addTaskMenu )
-
-        contentDiv.appendChild(addTaskDiv)
+        displayAddTaskIcon()
     } else {
         //display tasks
-
+        let taskCounter = 1
         proj.tasks.forEach(element => {
-            console.log(element)
+            // console.log(element)
+            
             let taskContainer = document.createElement('div')
             taskContainer.classList.add('taskDiv')
+            taskContainer.setAttribute('id', `td${taskCounter}div`)
+            
 
             let leftTaskContainer = document.createElement('div')
             leftTaskContainer.classList.add('leftTaskContainer')
 
             let taskCheckInput = document.createElement('input')
             taskCheckInput.setAttribute('type', 'checkbox')
+            taskCheckInput.setAttribute('name', `td${taskCounter}`)
             taskCheckInput.classList.add('checkbox')
+            taskCheckInput.addEventListener('change', removeTask)
 
             leftTaskContainer.appendChild(taskCheckInput)
 
             let rightTaskContainer = document.createElement('div')
             rightTaskContainer.classList.add('rightTaskContainer')
+            rightTaskContainer.addEventListener('click', expandTaskModal)
 
             let taskTitle = document.createElement('p')
             taskTitle.classList.add('taskTitle')
+            taskTitle.setAttribute('id', `td${taskCounter}`)
             taskTitle.textContent = `${element.title}`
 
             let taskDescription = document.createElement('p')
             taskDescription.classList.add('taskDescription')
+            taskDescription.setAttribute('id', `td${taskCounter}d`)
 
             taskDescription.textContent = `${element.description}`
 
@@ -133,6 +130,7 @@ const displayProject = (proj) => {
             taskContainer.appendChild(rightTaskContainer)
 
             contentDiv.appendChild(taskContainer)
+            taskCounter += 1
         });
 
 
@@ -142,4 +140,23 @@ const displayProject = (proj) => {
 
 }
 
-export {displayProject, findProject}
+const displayAddTaskIcon = () => {
+    let contentDiv = document.querySelector('.contentDiv')
+    let addTaskDiv = document.createElement('div')
+        addTaskDiv.classList.add('addTaskDiv')
+
+        let addTaskImg = document.createElement('img')
+        addTaskImg.setAttribute('src', './svgs/btn_svgs/task-plus.svg')
+
+        let addTaskMsg = document.createElement('p')
+        addTaskMsg.textContent = 'Add task'
+
+        addTaskDiv.appendChild(addTaskImg)
+        addTaskDiv.appendChild(addTaskMsg)
+
+        addTaskDiv.addEventListener('click', addTaskMenu )
+
+        contentDiv.appendChild(addTaskDiv)
+}
+
+export {displayProject, findProject, displayAddTaskIcon}

@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { format, nextSaturday } from "date-fns"
 
 
 
@@ -39,5 +39,53 @@ const chooseTomorrow = () => {
 
 }
 
+const chooseNextWeek =() => {
+    let today = new Date()
+    let dd = document.querySelector('#dueDateBtn')
+    let ddTxt = document.querySelector('#ddTxt')
+    ddTxt.textContent = 'Next week'
 
-export {chooseToday, chooseTomorrow}
+    dd.value = format(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7), 'MM/dd/yyyy')
+
+    let overlay2 = document.querySelector('.overlay2')
+    let calenderContainer = document.querySelector('.calenderContainer')
+
+    overlay2.remove()
+    calenderContainer.remove()
+
+
+
+}
+
+const chooseComingWeekend =() => {
+
+    
+    let dd = document.querySelector('#dueDateBtn')
+    let ddTxt = document.querySelector('#ddTxt')
+    ddTxt.textContent = 'Coming weekend'
+
+    dd.value = format(nextSaturday(new Date()), 'MM/dd/yyyy')
+
+    let overlay2 = document.querySelector('.overlay2')
+    let calenderContainer = document.querySelector('.calenderContainer')
+
+    overlay2.remove()
+    calenderContainer.remove()
+
+}
+
+const chooseNoDate = () => {
+    let dd = document.querySelector('#dueDateBtn')
+    let ddTxt = document.querySelector('#ddTxt')
+    ddTxt.textContent = 'No Date'
+
+    dd.value = ''
+    let overlay2 = document.querySelector('.overlay2')
+    let calenderContainer = document.querySelector('.calenderContainer')
+
+    overlay2.remove()
+    calenderContainer.remove()
+
+}
+
+export {chooseToday, chooseTomorrow, chooseNextWeek, chooseComingWeekend, chooseNoDate}

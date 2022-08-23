@@ -454,6 +454,17 @@ input {
     width: 100%;
 }
 
+.overlayG {
+    left:1px;
+    top:1px;
+    position: fixed;
+    z-index: 9996;
+    height: 100%;
+    width: 100%;
+    opacity: 50%;
+    background-color: gray;
+}
+
 .hidden {
     transform:scale(0);
 }
@@ -478,7 +489,7 @@ input {
 }
 
 .rightTaskContainer {
-    
+    flex-grow: 1;
     flex-direction: column;
     gap: 5px;
 }
@@ -639,4 +650,51 @@ input {
 
 .monthYearDisplay, .arrowDiv {
     padding:5px;
+}
+
+.expandContainer {
+    background-color: white;
+    z-index: 9997;
+    position: fixed;
+    left:250px;
+    top:80px;
+
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+
+    box-shadow: rgb(14 30 37 / 12%) 0px 2px 4px 0px, rgb(14 30 37 / 32%) 0px 2px 16px 0px;
+}
+
+.expandTopDiv {
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+}
+
+.expandTopLeft > img {
+    width: 20px;
+}
+
+.expandTopLeft {
+    display:flex;
+    gap:5px;
+}
+
+.expandTopRight {
+    display:flex;
+    gap:5px;
+}
+
+.expandTopLeft, .expandTopRight {
+    align-items: center;
+}
+
+.expandTopRight > button {
+    background-color: inherit;
+    border: none;
+}
+
+.expandTopRight > button> img{
+    width: 20px;
 }
