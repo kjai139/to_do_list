@@ -17,6 +17,10 @@
     --pastDate: #e2e8f0;
 
     --graytxt: #d1d5db;
+
+    --modalBg: #f1f5f9;
+    --modalBorderColor: #d1d5db;
+    --modalGray: #475569;
 }
 
 .grayDisplay {
@@ -519,10 +523,12 @@ input {
 }
 
 .taskTitle {
+    cursor: pointer;
     font-size: 14px;
 }
 
 .taskDescription {
+    cursor: pointer;
     font-size: 12px;
     color: var(--descriptionColor);
 }
@@ -656,12 +662,15 @@ input {
     background-color: white;
     z-index: 9997;
     position: fixed;
-    left:250px;
-    top:80px;
+    left:50%;
+    top:20%;
+
+    transform:translate(-50%, -50%);
 
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 65%;
+    font-family: var(--uiFont);
 
     box-shadow: rgb(14 30 37 / 12%) 0px 2px 4px 0px, rgb(14 30 37 / 32%) 0px 2px 16px 0px;
 }
@@ -670,6 +679,7 @@ input {
     display: flex;
     justify-content: space-between;
     padding:10px;
+    border-bottom: 1px solid var(--modalBorderColor);
 }
 
 .expandTopLeft > img {
@@ -697,4 +707,60 @@ input {
 
 .expandTopRight > button> img{
     width: 20px;
+}
+
+.expandContentDiv {
+    display:flex;
+}
+
+.expandBotLeftContainer > div {
+    display:flex;
+    
+}
+
+.expandBotLeftContainer > div > div {
+    padding:10px;
+}
+
+.expandBotLeftContainer {
+    flex-grow: 2;
+}
+
+.expandBotRightCont {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+
+    background-color: var(--modalBg);
+}
+
+.expandBotRightCont > div {
+    margin-bottom: 10px;
+}
+
+
+.modalBtn {
+    flex: 1;
+    display:flex;
+    border: none;
+    align-items: center;
+    font-family: var(--uiFont);
+    background-color: inherit;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.modalImg {
+    width: 16px;
+}
+
+.modalDiv {
+    display:flex;
+    flex: 1;
+    border-bottom: 1px solid var(--modalBorderColor);
+}
+
+.labelDiv {
+    color: var(--modalGray)
 }

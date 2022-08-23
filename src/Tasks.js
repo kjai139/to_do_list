@@ -11,7 +11,8 @@ class Task {
         dueDate = '',
         priority = '4',
         checklist = false,
-        projectName = ''
+        projectName = '',
+        id = ''
         )
     {
         this.title = title
@@ -20,6 +21,7 @@ class Task {
         this.priority = priority
         this.checklist = checklist
         this.projectName = projectName
+        this.id = id
     }
 }    
 
@@ -200,6 +202,9 @@ class Task {
 
             homePage.projectList.forEach(element => {
                 if (element.title == projLocation) {
+                    addTask.id = `${element.tasks.length}`
+
+                    // console.log(addTask.id)
                     element.tasks.push(addTask)
                     closeTaskModal()
 

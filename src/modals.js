@@ -37,7 +37,9 @@ const expandTaskModal = (target) => {
 
 
     let projTitle = document.querySelector('#contentTitle').textContent
-    let selectedProj
+    let selectedIndex = target.target.id.slice(2, 3)
+
+    console.log(selectedIndex)
 
 
     //dom
@@ -55,13 +57,7 @@ const expandTaskModal = (target) => {
     let projectTxt = document.createElement('p')
 
 
-    homePage.projectList.forEach(element => {
-        if (element.title == projTitle){
-            projectImg.setAttribute('src', `${element.img}`)
-            projectTxt.textContent = `${element.title}`
-            return
-        }
-    });
+    
 
     expandTopLeft.appendChild(projectImg)
     expandTopLeft.appendChild(projectTxt)
@@ -99,6 +95,150 @@ const expandTaskModal = (target) => {
 
 
     //mid sect
+
+    let expandContentDiv = document.createElement('div')
+    expandContentDiv.classList.add('expandContentDiv')
+
+    let expandBotLeftContainer = document.createElement('div')
+    expandBotLeftContainer.classList.add('expandBotLeftContainer')
+
+    let expandBotRightContainer = document.createElement('div')
+
+    expandContainer.appendChild(expandContentDiv)
+
+    expandContentDiv.appendChild(expandBotLeftContainer)
+    expandContentDiv.appendChild(expandBotRightContainer)
+
+    let taskCont = document.createElement('div')
+
+    let leftPartDiv = document.createElement('div')
+
+    let rightPartDiv = document.createElement('div')
+
+    let taskCheckInput = document.createElement('input')
+    taskCheckInput.setAttribute('type', 'checkbox')
+    taskCheckInput.setAttribute('name', `td${selectedIndex}`)
+    taskCheckInput.classList.add('checkbox')
+        // taskCheckInput.addEventListener('change', removeTask)
+
+    leftPartDiv.appendChild(taskCheckInput)
+
+    taskCont.appendChild(leftPartDiv)
+
+    let taskN = document.createElement('p')
+    taskN.classList.add('modalTaskName')
+
+    let taskD = document.createElement('p')
+    taskD.classList.add('modalTaskDescription')
+
+    rightPartDiv.appendChild(taskN)
+    rightPartDiv.appendChild(taskD)
+
+
+    taskCont.appendChild(rightPartDiv)
+
+    expandBotLeftContainer.appendChild(taskCont)
+
+    let projectNameDiv = document.createElement('div')
+    projectNameDiv.classList.add('labelDiv')
+
+    projectNameDiv.textContent = 'Project'
+
+    expandBotRightContainer.appendChild(projectNameDiv)
+
+    expandBotRightContainer.classList.add('expandBotRightCont')
+
+    //projbtn
+    let projBtnDiv = document.createElement('div')
+    projBtnDiv.classList.add('modalDiv')
+    let projBtn = document.createElement('button')
+    let projBtnImg = document.createElement('img')
+    let projBtnTxt = document.createElement('p')
+
+    projBtnImg.classList.add('modalImg')
+    projBtn.classList.add('modalBtn')
+
+    projBtn.appendChild(projBtnImg)
+    projBtn.appendChild(projBtnTxt)
+
+    projBtnDiv.appendChild(projBtn)
+
+    expandBotRightContainer.appendChild(projBtnDiv)
+
+    //due date btn
+
+    let ddLabel = document.createElement('div')
+    ddLabel.textContent = 'Due date'
+    ddLabel.classList.add('labelDiv')
+
+    expandBotRightContainer.appendChild(ddLabel)
+
+    let ddBtnDiv = document.createElement('div')
+    ddBtnDiv.classList.add('modalDiv')
+
+
+    let ddBtn = document.createElement('button')
+    ddBtn.classList.add('modalBtn')
+
+    let ddBtnImg = document.createElement('img')
+    ddBtnImg.classList.add('modalImg')
+    let ddBtnTxt = document.createElement('p')
+    ddBtnTxt.textContent = 'Due Date'
+
+    ddBtn.appendChild(ddBtnImg)
+    ddBtn.appendChild(ddBtnTxt)
+    ddBtnDiv.appendChild(ddBtn)
+
+    expandBotRightContainer.appendChild(ddBtnDiv)
+
+    //prior btn
+
+    let pLabel = document.createElement('div')
+    pLabel.textContent = 'Priority'
+    pLabel.classList.add('labelDiv')
+
+    expandBotRightContainer.appendChild(pLabel)
+
+    let pBtnDiv = document.createElement('div')
+    pBtnDiv.classList.add('modalDiv')
+
+
+    let pBtn = document.createElement('button')
+    pBtn.classList.add('modalBtn')
+
+    let pBtnImg = document.createElement('img')
+    pBtnImg.classList.add('modalImg')
+    let pBtnTxt = document.createElement('p')
+    pBtnTxt.textContent = ''
+
+    pBtn.appendChild(pBtnImg)
+    pBtn.appendChild(pBtnTxt)
+    pBtnDiv.appendChild(pBtn)
+
+
+
+
+
+    homePage.projectList.forEach(element => {
+        if (element.title == projTitle){
+            projectImg.setAttribute('src', `${element.img}`)
+            projectTxt.textContent = `${element.title}`
+
+            projBtnImg.setAttribute('src', `${element.img}`)
+            projBtnTxt.textContent = `${element.title}`
+
+            element.tasks.forEach(element => {
+                if (element.id == selectedIndex){
+                    taskN.textContent = `${element.title}`
+                    taskD.textContent = `${element.description}`
+                    if (element.dueDate.length > 0) {
+                        ddBtnTxt.textContent = `${element.dueDate}`
+                    }
+                }
+            });
+        }
+    });
+
 
 
 

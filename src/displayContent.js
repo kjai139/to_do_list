@@ -80,7 +80,7 @@ const displayProject = (proj) => {
             
             let taskContainer = document.createElement('div')
             taskContainer.classList.add('taskDiv')
-            taskContainer.setAttribute('id', `td${taskCounter}div`)
+            taskContainer.setAttribute('id', `td${element.id}div`)
             
 
             let leftTaskContainer = document.createElement('div')
@@ -88,7 +88,7 @@ const displayProject = (proj) => {
 
             let taskCheckInput = document.createElement('input')
             taskCheckInput.setAttribute('type', 'checkbox')
-            taskCheckInput.setAttribute('name', `td${taskCounter}`)
+            taskCheckInput.setAttribute('name', `td${element.id}`)
             taskCheckInput.classList.add('checkbox')
             taskCheckInput.addEventListener('change', removeTask)
 
@@ -96,16 +96,19 @@ const displayProject = (proj) => {
 
             let rightTaskContainer = document.createElement('div')
             rightTaskContainer.classList.add('rightTaskContainer')
-            rightTaskContainer.addEventListener('click', expandTaskModal)
+            rightTaskContainer.setAttribute('id', `task${element.id}`)
+            
 
             let taskTitle = document.createElement('p')
             taskTitle.classList.add('taskTitle')
-            taskTitle.setAttribute('id', `td${taskCounter}`)
+            taskTitle.setAttribute('id', `td${element.id}`)
             taskTitle.textContent = `${element.title}`
+            taskTitle.addEventListener('click', expandTaskModal)
 
             let taskDescription = document.createElement('p')
             taskDescription.classList.add('taskDescription')
-            taskDescription.setAttribute('id', `td${taskCounter}d`)
+            taskDescription.setAttribute('id', `td${element.id}d`)
+            taskDescription.addEventListener('click', expandTaskModal)
 
             taskDescription.textContent = `${element.description}`
 
