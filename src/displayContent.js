@@ -41,15 +41,15 @@ const findProject = (projectName) => {
 }
 
 //currently working on
-const writeTasks = () => {
+const writeTasks = (element) => {
    
         // console.log(element)
 
-        let contentDiv = document.querySelector('contentDiv')
+        let contentDiv = document.querySelector('.contentDiv')
         
         let taskContainer = document.createElement('div')
         taskContainer.classList.add('taskDiv')
-        taskContainer.setAttribute('id', `td${element.id}div`)
+        taskContainer.setAttribute('id', `${element.projectName}${element.id}div`)
         
 
         let leftTaskContainer = document.createElement('div')
@@ -57,7 +57,7 @@ const writeTasks = () => {
 
         let taskCheckInput = document.createElement('input')
         taskCheckInput.setAttribute('type', 'checkbox')
-        taskCheckInput.setAttribute('name', `td${element.id}`)
+        taskCheckInput.setAttribute('name', `${element.projectName}-${element.id}`)
         taskCheckInput.classList.add('checkbox')
         taskCheckInput.addEventListener('change', removeTask)
 
@@ -65,24 +65,49 @@ const writeTasks = () => {
 
         let rightTaskContainer = document.createElement('div')
         rightTaskContainer.classList.add('rightTaskContainer')
-        rightTaskContainer.setAttribute('id', `task${element.id}`)
+        rightTaskContainer.setAttribute('id', `${element.projectName}${element.id}task`)
         
 
         let taskTitle = document.createElement('p')
         taskTitle.classList.add('taskTitle')
-        taskTitle.setAttribute('id', `td${element.id}`)
+        taskTitle.setAttribute('id', `${element.projectName}${element.id}title`)
         taskTitle.textContent = `${element.title}`
         taskTitle.addEventListener('click', expandTaskModal)
 
         let taskDescription = document.createElement('p')
         taskDescription.classList.add('taskDescription')
-        taskDescription.setAttribute('id', `td${element.id}d`)
+        taskDescription.setAttribute('id', `${element.projectName}${element.id}d`)
         taskDescription.addEventListener('click', expandTaskModal)
 
         taskDescription.textContent = `${element.description}`
 
+        let todayBottomDiv = document.createElement('div')
+        todayBottomDiv.classList.add('todayBottomDiv')
+
+        let projIndicatorBtn = document.createElement('button')
+        projIndicatorBtn.classList.add('projIndicatorBtn')
+
+        let projIndicatorBtnImg = document.createElement('img')
+        let projIndicatorBtnTxt = document.createElement('p')
+
+        let projName = element.projectName
+
+        homePage.projectList.forEach(element => {
+            if (element.title == projName){
+                projIndicatorBtnImg.setAttribute('src', `${element.img}`)
+                projIndicatorBtnTxt.textContent = `${element.title}`
+            }
+        });
+
+        projIndicatorBtn.appendChild(projIndicatorBtnImg)
+        projIndicatorBtn.appendChild(projIndicatorBtnTxt)
+
+        
+
+
         let taskDateBtn = document.createElement('button')
-        taskDateBtn.setAttribute('id', 'taskDateBtn')
+        taskDateBtn.classList.add('taskDateBtn')
+        
 
         let taskDateSvg = document.createElement('img')
         taskDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
@@ -96,7 +121,9 @@ const writeTasks = () => {
 
         rightTaskContainer.appendChild(taskTitle)
         rightTaskContainer.appendChild(taskDescription)
-        rightTaskContainer.appendChild(taskDateBtn)
+        todayBottomDiv.appendChild(taskDateBtn)
+        todayBottomDiv.appendChild(projIndicatorBtn)
+        rightTaskContainer.appendChild(todayBottomDiv)
 
         taskContainer.appendChild(leftTaskContainer)
         taskContainer.appendChild(rightTaskContainer)
@@ -146,7 +173,7 @@ const displayProject = (proj) => {
             
             let taskContainer = document.createElement('div')
             taskContainer.classList.add('taskDiv')
-            taskContainer.setAttribute('id', `td${element.id}div`)
+            taskContainer.setAttribute('id', `${element.projectName}${element.id}div`)
             
 
             let leftTaskContainer = document.createElement('div')
@@ -154,7 +181,7 @@ const displayProject = (proj) => {
 
             let taskCheckInput = document.createElement('input')
             taskCheckInput.setAttribute('type', 'checkbox')
-            taskCheckInput.setAttribute('name', `td${element.id}`)
+            taskCheckInput.setAttribute('name', `${element.projectName}-${element.id}`)
             taskCheckInput.classList.add('checkbox')
             taskCheckInput.addEventListener('change', removeTask)
 
@@ -162,24 +189,24 @@ const displayProject = (proj) => {
 
             let rightTaskContainer = document.createElement('div')
             rightTaskContainer.classList.add('rightTaskContainer')
-            rightTaskContainer.setAttribute('id', `task${element.id}`)
+            rightTaskContainer.setAttribute('id', `${element.projectName}${element.id}tasks`)
             
 
             let taskTitle = document.createElement('p')
             taskTitle.classList.add('taskTitle')
-            taskTitle.setAttribute('id', `td${element.id}`)
+            taskTitle.setAttribute('id', `${element.projectName}${element.id}title`)
             taskTitle.textContent = `${element.title}`
             taskTitle.addEventListener('click', expandTaskModal)
 
             let taskDescription = document.createElement('p')
             taskDescription.classList.add('taskDescription')
-            taskDescription.setAttribute('id', `td${element.id}d`)
+            taskDescription.setAttribute('id', `${element.projectName}${element.id}d`)
             taskDescription.addEventListener('click', expandTaskModal)
 
             taskDescription.textContent = `${element.description}`
 
             let taskDateBtn = document.createElement('button')
-            taskDateBtn.setAttribute('id', 'taskDateBtn')
+            taskDateBtn.classList.add('taskDateBtn')
 
             let taskDateSvg = document.createElement('img')
             taskDateSvg.setAttribute('src', './svgs/btn_svgs/due-date.svg')
@@ -229,7 +256,9 @@ const displayAddTaskIcon = () => {
 }
 
 //working on currently
-const displayToday = () => {
+const displayToday = (target) => {
+
+    
 
     const contentContainer = document.querySelector('.rightContentContainer')
     contentContainer.textContent =''
@@ -263,21 +292,36 @@ const displayToday = () => {
 
     subSectContainer.appendChild(subSectTitle)
 
+    contentContainer.appendChild(contentDiv)
 
 
 
 
 
 
-    homePage.projList.forEach(element => {
+
+    homePage.projectList.forEach(element => {
+        let eleId
+        if (document.querySelector(`#${element.id}`) != null){
+            eleId = document.querySelector(`#${element.id}`)
+            eleId.classList.remove('selected')
+
+            // console.log(eleId, 'removed')
+        }
+
+
         element.tasks.forEach(element => {
-            if (element.dueDate == new Date()){
-                writeTasks()
+            console.log(element.dueDate, new Date())
+            if (element.dueDate == format(new Date(), 'MM/dd/yyyy')){
+                console.log('tasks found')
+                writeTasks(element)
             }
         });
         
     });
 
+    target.target.classList.add('selected')
+
 }
 
-export {displayProject, findProject, displayAddTaskIcon}
+export {displayProject, findProject, displayAddTaskIcon, displayToday}

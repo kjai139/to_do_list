@@ -296,7 +296,7 @@ const showProjectSide =() => {
         projArrow.classList.remove('toggleOn')
     } else {
         homePage.projectList.forEach(element => {
-            if (element.title != 'Inbox') {
+            if (element.title != 'Inbox' && element.title !='Today') {
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
 

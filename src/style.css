@@ -406,7 +406,7 @@ input {
     pointer-events: none;
 }
 
-#taskDateBtn {
+.taskDateBtn, .projIndicatorBtn {
     display: flex;
     padding:5px;
     justify-content: center;
@@ -415,6 +415,10 @@ input {
     font-family: var(--uiFont);
     border: 1px solid var(--borderColor);
     border-radius: var(--borderR);
+}
+
+.projIndicatorBtn {
+    border: none;
 }
 
 .bottomTaskContainer > button> img {
@@ -492,6 +496,31 @@ input {
     font-family: var(--contentFont);
 }
 
+.contentDiv > div {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.contentDiv > div > h2 {
+    
+    font-family: var(--uiFont);
+}
+
+.contentDiv > div > p {
+    font-size: 14px;
+    color: var(--graytxt);
+    font-family: var(--contentFont);
+}
+
+.subSectTitle {
+    padding: 10px;
+    border-bottom: 1px solid var(--borderColor);
+    font-weight: bold;
+    flex:1;
+}
+
 .rightTaskContainer {
     flex-grow: 1;
     flex-direction: column;
@@ -514,12 +543,18 @@ input {
     gap: 10px;
 }
 
-#taskDateBtn > img {
+.taskDateBtn > img, .projIndicatorBtn > img {
     width: 16px;
 }
 
-#taskDateBtn > p {
+.taskDateBtn > p, .projIndicatorBtn > p {
     font-size: 12px;
+}
+
+.todayBottomDiv {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .taskTitle {
@@ -535,6 +570,7 @@ input {
 
 .leftTaskContainer {
     padding: 0;
+    align-self: flex-start;
 }
 
 .calenderContainer > div > ul {

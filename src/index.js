@@ -1,6 +1,6 @@
 import './style.css'
 import {Task, addTaskMenu}  from './Tasks.js'
-import { displayProject, findProject } from './displayContent'
+import { displayProject, displayToday, findProject } from './displayContent'
 import {Project, addProjectMenu, showProjectSide} from './Projects'
 import {homePage} from './globalVar'
 
@@ -18,12 +18,18 @@ addProjBtn.addEventListener('click', addProjectMenu)
 const projDisplay = document.querySelector('#Projects')
 projDisplay.addEventListener('click', showProjectSide)
 
+const todayDisplay = document.querySelector('#todayBtn')
+todayDisplay.addEventListener('click', displayToday)
+
 
 
 
 //testing for styling
 const testInbox = new Project('Inbox')
 testInbox.img = './svgs/sidebar_svgs/inbox-outline.svg'
+
+const todayBox = new Project('Today')
+todayBox.id = 'todayBtn'
 
 const testTask1 = new(Task)
 testTask1.title = 'Test Task 1'
@@ -40,6 +46,7 @@ testInbox.addTask(testTask2)
 
 const inboxBtn = document.querySelector('#Inbox')
 homePage.addProj(testInbox)
+homePage.addProj(todayBox)
 
 
 

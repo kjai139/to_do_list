@@ -41,11 +41,26 @@ const createProjDropBtn = () => {
 
     homePage.projectList.forEach(element => {
         if (element.title == selectedProj || element.id == selectedProj){
-            dropBtnImg.setAttribute('src', `${element.img}`)
+
+            if (element.title == 'Today') {
+                dropBtnImg.setAttribute('src', `./svgs/sidebar_svgs/inbox-outline.svg`)
+
+                
+                dropBtnTxt.setAttribute('id', 'dropBtnTxt')
+                dropBtnTxt.textContent = `Inbox`
+            } else {
 
             
-            dropBtnTxt.setAttribute('id', 'dropBtnTxt')
-            dropBtnTxt.textContent = `${element.title}`
+                console.log(element.title)
+            
+                dropBtnImg.setAttribute('src', `${element.img}`)
+
+            
+                dropBtnTxt.setAttribute('id', 'dropBtnTxt')
+                dropBtnTxt.textContent = `${element.title}`
+
+            }
+            
         }
         
     });
@@ -100,6 +115,8 @@ const displayProjDrop = (event) => {
     
 
     homePage.projectList.forEach(element => {
+
+        if (element.title != 'Today'){
         let li = document.createElement('li')
 
         let leftDiv = document.createElement('div')
@@ -140,6 +157,9 @@ const displayProjDrop = (event) => {
             projDropContainer.remove()
             overlay2.remove()
         })
+
+        }
+        
         
 
     })

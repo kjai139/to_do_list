@@ -198,6 +198,8 @@ class Task {
             addTask.title = nTask.get('taskName')
             addTask.description = nTask.get('taskDescription')
             addTask.dueDate = document.querySelector('#dueDateBtn').value
+            addTask.projectName = projLocation
+            console.log('proj name', addTask.projectName)
             
 
             homePage.projectList.forEach(element => {
@@ -235,28 +237,34 @@ class Task {
     }
 
     const removeTask = (target) => {
-        let selectedProj = document.querySelector('#contentTitle').textContent
+        
 
-        let selectedTask = target.target.name
+        // if (selectedProj == 'Today') {
+            // selectedProj = document.querySelector
+        // }
+        let contentDiv = document.querySelector('.contentDiv')
 
-        let selectedTaskTitle = document.querySelector(`#${selectedTask}`).textContent
+        let selectedTask = target.target.name.split('-')
+        let selectedProj = selectedTask[0]
 
-        let selectedDescription = document.querySelector(`#${selectedTask}d`).textContent
+        let selectedTaskTitle = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}title`).textContent
+
+        let selectedDescription = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}d`).textContent
 
         console.log(selectedTask, selectedDescription)
 
         homePage.projectList.forEach(element => {
             if (element.title == selectedProj) {
-                console.log('eletitle match selected proj')
+                // console.log('eletitle match selected proj')
                 element.tasks.forEach(ele => {
-                    console.log(ele)
+                    // console.log(ele)
                     if (selectedTaskTitle == ele.title && selectedDescription == ele.description ){
                         console.log('tasks matched for removal')
                         element.removeTask(ele)
-                        let selectedDiv = document.querySelector(`#${selectedTask}div`)
+                        let selectedDiv = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}div`)
 
                         selectedDiv.remove()
-                        if (element.tasks.length == 0) {
+                        if (element.tasks.length == 0 && document.querySelector('.addTaskDiv') == null) {
                             displayAddTaskIcon()
                         }
                     }
