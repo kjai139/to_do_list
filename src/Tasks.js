@@ -9,7 +9,7 @@ class Task {
         title = 'Unknown', 
         description = 'Unknown', 
         dueDate = '',
-        priority = '4',
+        priority = '1',
         checklist = false,
         projectName = '',
         id = ''

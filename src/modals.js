@@ -183,7 +183,7 @@ const expandTaskModal = (target) => {
     let ddBtnImg = document.createElement('img')
     ddBtnImg.classList.add('modalImg')
     let ddBtnTxt = document.createElement('p')
-    ddBtnTxt.textContent = 'Due Date'
+    ddBtnTxt.textContent = 'None'
 
     ddBtn.appendChild(ddBtnImg)
     ddBtn.appendChild(ddBtnTxt)
@@ -211,9 +211,15 @@ const expandTaskModal = (target) => {
     let pBtnTxt = document.createElement('p')
     pBtnTxt.textContent = ''
 
+    
+
     pBtn.appendChild(pBtnImg)
     pBtn.appendChild(pBtnTxt)
     pBtnDiv.appendChild(pBtn)
+
+    expandBotRightContainer.appendChild(pBtn)
+
+    //
 
 
 
@@ -231,6 +237,8 @@ const expandTaskModal = (target) => {
                 if (element.id == selectedIndex){
                     taskN.textContent = `${element.title}`
                     taskD.textContent = `${element.description}`
+                    pBtnImg.setAttribute('src', `./svgs/btn_svgs/pflag${element.priority}.svg`)
+                    pBtnTxt.textContent = `P${element.priority}`
                     if (element.dueDate.length > 0) {
                         ddBtnTxt.textContent = `${element.dueDate}`
                     }

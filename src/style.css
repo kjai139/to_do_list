@@ -663,7 +663,7 @@ input {
     z-index: 9997;
     position: fixed;
     left:50%;
-    top:20%;
+    top:30%;
 
     transform:translate(-50%, -50%);
 
@@ -683,11 +683,12 @@ input {
 }
 
 .expandTopLeft > img {
-    width: 20px;
+    width: 14px;
 }
 
 .expandTopLeft {
     display:flex;
+    font-size: 14px;
     gap:5px;
 }
 
@@ -741,11 +742,12 @@ input {
 
 
 .modalBtn {
+    gap:5px;
     flex: 1;
     display:flex;
     border: none;
     align-items: center;
-    font-family: var(--uiFont);
+    font-family: var(--contentFont);
     background-color: inherit;
     font-size: 14px;
     padding: 5px;
@@ -763,4 +765,13 @@ input {
 
 .labelDiv {
     color: var(--modalGray)
+}
+
+.modalTaskDescription {
+    font-size: 14px;
+    color: gray;
+}
+
+.modalTaskName {
+    font-size: 20px;
 }
