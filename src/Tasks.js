@@ -251,7 +251,7 @@ class Task {
 
         let selectedDescription = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}d`).textContent
 
-        console.log(selectedTask, selectedDescription)
+        // console.log(selectedTask, selectedDescription)
 
         homePage.projectList.forEach(element => {
             if (element.title == selectedProj) {
@@ -259,7 +259,7 @@ class Task {
                 element.tasks.forEach(ele => {
                     // console.log(ele)
                     if (selectedTaskTitle == ele.title && selectedDescription == ele.description ){
-                        console.log('tasks matched for removal')
+                        // console.log('tasks matched for removal')
                         element.removeTask(ele)
                         let selectedDiv = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}div`)
 
