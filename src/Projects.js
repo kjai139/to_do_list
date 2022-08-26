@@ -1,4 +1,4 @@
-import { homePage, updateLocal } from "./globalVar"
+import { checkItemCount, homePage, updateLocal } from "./globalVar"
 import { closeProjModal } from "./modals"
 import {findProject} from "./displayContent"
 
@@ -261,6 +261,8 @@ const addProjBtnF = (target) => {
 
         
         closeProjModal()
+        let projExpand = document.querySelector('#Projects')
+        projExpand.click()
 
     } else {
         target.preventDefault()
@@ -357,6 +359,7 @@ const removeProject = (target) => {
 
             let li = document.querySelector(`#${element.id}li`)
             li.remove()
+            checkItemCount()
             updateLocal()
         }
     });

@@ -1,4 +1,4 @@
-import {homePage, updateLocal} from './globalVar'
+import {checkItemCount, homePage, updateLocal} from './globalVar'
 import {createProjDropBtn, displayProjDrop } from './buttons'
 import { closeTaskModal } from './modals'
 import { displayProject, displayAddTaskIcon } from './displayContent'
@@ -209,6 +209,7 @@ class Task {
 
                     // console.log(addTask.id)
                     element.tasks.push(addTask)
+                    checkItemCount()
                     updateLocal()
                     console.log(localStorage.getItem('myHome'))
                     closeTaskModal()
@@ -250,9 +251,9 @@ class Task {
         let selectedTask = target.target.name.split('-')
         let selectedProj = selectedTask[0]
 
-        let selectedTaskTitle = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}title`).textContent
+        let selectedTaskTitle = document.querySelector(`#${selectedTask[0]}-${selectedTask[1]}-title`).textContent
 
-        let selectedDescription = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}d`).textContent
+        let selectedDescription = document.querySelector(`#${selectedTask[0]}-${selectedTask[1]}-d`).textContent
 
         // console.log(selectedTask, selectedDescription)
 
@@ -265,8 +266,9 @@ class Task {
                         // console.log('tasks matched for removal')
                         let taskIndex = element.tasks.indexOf(ele)
                         element.tasks.splice(taskIndex, 1)
+                        checkItemCount()
                         updateLocal()
-                        let selectedDiv = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}div`)
+                        let selectedDiv = document.querySelector(`#${selectedTask[0]}-${selectedTask[1]}-div`)
 
                         selectedDiv.remove()
                         if (element.tasks.length == 0 && document.querySelector('.addTaskDiv') == null) {

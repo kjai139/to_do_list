@@ -37,7 +37,10 @@ const expandTaskModal = (target) => {
 
 
     let projTitle = document.querySelector('#contentTitle').textContent
-    let selectedIndex = target.target.id.slice(2, 3)
+    let selectedSplit = target.target.id.split('-')
+    let selectedProj = selectedSplit[0]
+    let selectedIndex = selectedSplit[1]
+    
 
     console.log(selectedIndex)
 
@@ -117,7 +120,7 @@ const expandTaskModal = (target) => {
 
     let taskCheckInput = document.createElement('input')
     taskCheckInput.setAttribute('type', 'checkbox')
-    taskCheckInput.setAttribute('name', `td${selectedIndex}`)
+    taskCheckInput.setAttribute('name', `${selectedProj}-${selectedIndex}`)
     taskCheckInput.classList.add('checkbox')
         // taskCheckInput.addEventListener('change', removeTask)
 
@@ -226,7 +229,7 @@ const expandTaskModal = (target) => {
 
 
     homePage.projectList.forEach(element => {
-        if (element.title == projTitle){
+        if (element.title == selectedProj){
             projectImg.setAttribute('src', `${element.img}`)
             projectTxt.textContent = `${element.title}`
 

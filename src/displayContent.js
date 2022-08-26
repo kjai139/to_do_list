@@ -49,7 +49,7 @@ const writeTasks = (element) => {
         
         let taskContainer = document.createElement('div')
         taskContainer.classList.add('taskDiv')
-        taskContainer.setAttribute('id', `${element.projectName}${element.id}div`)
+        taskContainer.setAttribute('id', `${element.projectName}-${element.id}-div`)
         
 
         let leftTaskContainer = document.createElement('div')
@@ -65,18 +65,18 @@ const writeTasks = (element) => {
 
         let rightTaskContainer = document.createElement('div')
         rightTaskContainer.classList.add('rightTaskContainer')
-        rightTaskContainer.setAttribute('id', `${element.projectName}${element.id}task`)
+        rightTaskContainer.setAttribute('id', `${element.projectName}-${element.id}-task`)
         
 
         let taskTitle = document.createElement('p')
         taskTitle.classList.add('taskTitle')
-        taskTitle.setAttribute('id', `${element.projectName}${element.id}title`)
+        taskTitle.setAttribute('id', `${element.projectName}-${element.id}-title`)
         taskTitle.textContent = `${element.title}`
         taskTitle.addEventListener('click', expandTaskModal)
 
         let taskDescription = document.createElement('p')
         taskDescription.classList.add('taskDescription')
-        taskDescription.setAttribute('id', `${element.projectName}${element.id}d`)
+        taskDescription.setAttribute('id', `${element.projectName}-${element.id}-d`)
         taskDescription.addEventListener('click', expandTaskModal)
 
         taskDescription.textContent = `${element.description}`
@@ -173,7 +173,7 @@ const displayProject = (proj) => {
             
             let taskContainer = document.createElement('div')
             taskContainer.classList.add('taskDiv')
-            taskContainer.setAttribute('id', `${element.projectName}${element.id}div`)
+            taskContainer.setAttribute('id', `${element.projectName}-${element.id}-div`)
             
 
             let leftTaskContainer = document.createElement('div')
@@ -189,18 +189,18 @@ const displayProject = (proj) => {
 
             let rightTaskContainer = document.createElement('div')
             rightTaskContainer.classList.add('rightTaskContainer')
-            rightTaskContainer.setAttribute('id', `${element.projectName}${element.id}tasks`)
+            rightTaskContainer.setAttribute('id', `${element.projectName}-${element.id}-tasks`)
             
 
             let taskTitle = document.createElement('p')
             taskTitle.classList.add('taskTitle')
-            taskTitle.setAttribute('id', `${element.projectName}${element.id}title`)
+            taskTitle.setAttribute('id', `${element.projectName}-${element.id}-title`)
             taskTitle.textContent = `${element.title}`
             taskTitle.addEventListener('click', expandTaskModal)
 
             let taskDescription = document.createElement('p')
             taskDescription.classList.add('taskDescription')
-            taskDescription.setAttribute('id', `${element.projectName}${element.id}d`)
+            taskDescription.setAttribute('id', `${element.projectName}-${element.id}-d`)
             taskDescription.addEventListener('click', expandTaskModal)
 
             taskDescription.textContent = `${element.description}`
@@ -348,6 +348,9 @@ const displayUpcoming = (target) => {
     contentDiv.appendChild(contentTitleDiv)
     contentContainer.appendChild(contentDiv)
 
+    let closestDate
+    let dateArray =[]
+
     homePage.projectList.forEach(element => {
         let eleId
         if (document.querySelector(`#${element.id}`) != null){
@@ -356,25 +359,61 @@ const displayUpcoming = (target) => {
 
             // console.log(eleId, 'removed')
         }
+        
         element.tasks.forEach(element => {
-            if (compareAsc(new Date(element.dueDate), new Date()) == 1){
+            if (compareAsc(new Date(element.dueDate), new Date()) == 1 && dateArray.includes(element.dueDate) == false){
 
+                dateArray.push(element.dueDate)
+                
+                
+            }
+
+        });   
+
+        dateArray.sort(function sortDate(a, b){
+            if (compareAsc(new Date(a), new Date(b)) == 1){
+                console.log(compareAsc(new Date(a), new Date(b)))
+                return 1
+            } else {
+                return -1
+            }
+        })
+    });
+        
+        dateArray.forEach(ele => {
             const subSectContainer = document.createElement('div')
             subSectContainer.classList.add('subSectContainer')
             contentDiv.appendChild(subSectContainer)
 
             const subSectTitle = document.createElement('div')
             subSectTitle.classList.add('subSectTitle')
-            subSectTitle.textContent = `${format(new Date(element.dueDate), 'MMM d eee')}`
+            subSectTitle.textContent = `${format(new Date(ele), 'MMM d eee')}`
 
             subSectContainer.appendChild(subSectTitle)
 
             contentDiv.appendChild(subSectContainer)
 
-            writeTasks(element)
-            }
+            homePage.projectList.forEach(elem => {
+                elem.tasks.forEach(element => {
+                    if (ele == element.dueDate) {
+                        writeTasks(element)
+                    }
+                    
+                });
+            });
+
+
+
+            
         });
-    });
+
+        console.log(dateArray)
+
+
+
+            
+        
+    
 
     target.target.classList.add('selected')
 

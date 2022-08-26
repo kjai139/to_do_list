@@ -1,5 +1,6 @@
 import Home from './Home'
 import { Project } from './Projects'
+import format from 'date-fns/format'
 
 
 const findHome = () => {
@@ -45,7 +46,33 @@ const clearLocal = () => {
     localStorage.clear()
 }
 
+const checkItemCount = () => {
+    let inboxInd = document.querySelector('#Inbox-indicator')
+    let todayInd = document.querySelector('#todayBtn-indicator')
 
-export {homePage, updateLocal, clearLocal}
+    let todayCount = 0
+
+
+    homePage.projectList.forEach(element => {
+        if (element.title == 'Inbox'){
+            inboxInd.textContent = `${element.tasks.length}`
+        }
+        
+    });
+
+    homePage.projectList.forEach(element => {
+        element.tasks.forEach(element => {
+            // console.log(element.dueDate, new Date())
+            if (element.dueDate == format(new Date(), 'MM/dd/yyyy')){
+                // console.log('tasks found')
+                todayCount += 1
+            }
+        });
+    })
+
+    todayInd.textContent = todayCount
+}
+
+export {homePage, updateLocal, clearLocal, checkItemCount}
 
 

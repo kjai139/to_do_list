@@ -2,7 +2,7 @@ import './style.css'
 import {addTaskMenu}  from './Tasks.js'
 import { displayToday, displayUpcoming, findProject } from './displayContent'
 import {addProjectMenu, showProjectSide} from './Projects'
-import {clearLocal, homePage} from './globalVar'
+import {checkItemCount, clearLocal, homePage} from './globalVar'
 
 
 
@@ -38,7 +38,7 @@ const inboxBtn = document.querySelector('#Inbox')
 
 
 inboxBtn.addEventListener('click', findProject)
-
+checkItemCount()
 inboxBtn.click()
 
 
