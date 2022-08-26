@@ -21,6 +21,7 @@
     --modalBg: #f1f5f9;
     --modalBorderColor: #d1d5db;
     --modalGray: #475569;
+    --tooltipRadius: 8px;
 }
 
 .grayDisplay {
@@ -100,6 +101,28 @@ button:hover, .calenderBtns:hover {
     
 }
 
+#addTaskBtn, #clearBtn {
+    position: relative;
+}
+
+#clearBtn .tooltipText, #addTaskBtn .tooltipText {
+    display:flex;
+    visibility: hidden;
+    top: 30px;
+    left: 0px;
+    position: absolute;
+    padding: 5px;
+    border-radius: var(--tooltipRadius);
+    
+    background-color: black;
+    color: white;
+    
+}
+
+#clearBtn:hover .tooltipText, #addTaskBtn:hover .tooltipText {
+    visibility: visible;
+}
+
 #searchbar {
     padding-left: 40px;
     width: 200px;
@@ -173,7 +196,7 @@ input {
     align-items: center;
 }
 
-.sidebar > li > button, #projDisplay > li> button {
+.sidebar > li > button, #projDisplay > li> button{
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
@@ -219,8 +242,12 @@ input {
     gap: 5px;
 }
 
-#addProjBtn > img {
+#addProjBtn > img, .removeBtnImg {
     width: 20px;
+}
+
+.projRemoveBtn {
+    flex-grow: 0 !important;
 }
 
 .sidebar > li > button > div, #projDisplay > li > button > div {

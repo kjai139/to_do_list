@@ -1,8 +1,9 @@
-import {homePage} from './globalVar'
+import {homePage, updateLocal} from './globalVar'
 import {createProjDropBtn, displayProjDrop } from './buttons'
 import { closeTaskModal } from './modals'
 import { displayProject, displayAddTaskIcon } from './displayContent'
 import {displayDueDateDrop} from './buttons.js'
+import { removeTaskFromProj } from './Projects'
 
 class Task {
     constructor(
@@ -208,6 +209,8 @@ class Task {
 
                     // console.log(addTask.id)
                     element.tasks.push(addTask)
+                    updateLocal()
+                    console.log(localStorage.getItem('myHome'))
                     closeTaskModal()
 
                     let selection = document.querySelector('.selected') !=null
@@ -260,7 +263,9 @@ class Task {
                     // console.log(ele)
                     if (selectedTaskTitle == ele.title && selectedDescription == ele.description ){
                         // console.log('tasks matched for removal')
-                        element.removeTask(ele)
+                        let taskIndex = element.tasks.indexOf(ele)
+                        element.tasks.splice(taskIndex, 1)
+                        updateLocal()
                         let selectedDiv = document.querySelector(`#${selectedTask[0]}${selectedTask[1]}div`)
 
                         selectedDiv.remove()

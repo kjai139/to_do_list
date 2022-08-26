@@ -1,10 +1,9 @@
 import './style.css'
-import {Task, addTaskMenu}  from './Tasks.js'
-import { displayProject, displayToday, findProject } from './displayContent'
-import {Project, addProjectMenu, showProjectSide} from './Projects'
-import {homePage} from './globalVar'
+import {addTaskMenu}  from './Tasks.js'
+import { displayToday, displayUpcoming, findProject } from './displayContent'
+import {addProjectMenu, showProjectSide} from './Projects'
+import {clearLocal, homePage} from './globalVar'
 
-import { displayDueDateDrop } from './buttons'
 
 
 
@@ -21,32 +20,19 @@ projDisplay.addEventListener('click', showProjectSide)
 const todayDisplay = document.querySelector('#todayBtn')
 todayDisplay.addEventListener('click', displayToday)
 
+const upcomingDisplay = document.querySelector('#upcomingBtn')
+upcomingDisplay.addEventListener('click' , displayUpcoming)
+
+const clearBtn = document.querySelector('#clearBtn')
+clearBtn.addEventListener('click', clearLocal)
 
 
 
-//testing for styling
-const testInbox = new Project('Inbox')
-testInbox.img = './svgs/sidebar_svgs/inbox-outline.svg'
-
-const todayBox = new Project('Today')
-todayBox.id = 'todayBtn'
-
-const testTask1 = new(Task)
-testTask1.title = 'Test Task 1'
-testTask1.description = 'Test task description'
-
-const testTask2 = new(Task)
-testTask2.title = 'Task 2'
 
 
-testInbox.addTask(testTask1)
-testInbox.addTask(testTask2)
 
-//testing inbox
 
 const inboxBtn = document.querySelector('#Inbox')
-homePage.addProj(testInbox)
-homePage.addProj(todayBox)
 
 
 

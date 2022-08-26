@@ -1,4 +1,4 @@
-import { homePage } from "./globalVar"
+import { homePage, updateLocal } from "./globalVar"
 import { closeProjModal } from "./modals"
 import {findProject} from "./displayContent"
 
@@ -28,17 +28,11 @@ class Project {
         }
     }
 
-    removeTask = (task) => {
-        if (this.tasks.includes(task)){
-
-            let taskIndex = this.tasks.indexOf(task)
-            this.tasks.splice(taskIndex, 1)
-
-            console.log(this.tasks)
-        }
-    }
+   
    
 }
+
+
 
 const addProjectMenu = () => {
     let addProjContainer = document.createElement('div')
@@ -238,7 +232,8 @@ const addProjBtnF = (target) => {
             newP.img = './svgs/circle-p4.svg'
         }
         console.log(newP.img)
-        homePage.addProj(newP)
+        homePage.projectList.push(newP)
+        updateLocal()
         if (projArrow.classList.contains('toggleOn')){
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
@@ -296,11 +291,26 @@ const showProjectSide =() => {
         projArrow.classList.remove('toggleOn')
     } else {
         homePage.projectList.forEach(element => {
-            if (element.title != 'Inbox' && element.title !='Today') {
+            if (element.title != 'Inbox' && element.title !='Today' && element.title !='Upcoming') {
                 let li = document.createElement('li')
                 let btn = document.createElement('button')
+                let removeBtn = document.createElement('button')
+                let removeBtnImg = document.createElement('img')
+
+
+
+                li.setAttribute('id', `${element.id}li`)
+                removeBtnImg.classList.add('removeBtnImg')
+                removeBtnImg.setAttribute('src', './svgs/sidebar_svgs/trash.svg')
+
+                removeBtn.addEventListener('click', removeProject)
+
+
 
                 btn.setAttribute('id', `${element.id}`)
+                removeBtn.setAttribute('id', `r-${element.id}`)
+                removeBtn.classList.add('projRemoveBtn')
+                removeBtn.appendChild(removeBtnImg)
 
                 let btnDiv = document.createElement('div')
         
@@ -316,6 +326,7 @@ const showProjectSide =() => {
                 btn.addEventListener('click', findProject)
                 btn.appendChild(btnDiv)
                 li.appendChild(btn)
+                li.appendChild(removeBtn)
 
             
         
@@ -333,6 +344,22 @@ const showProjectSide =() => {
 
     
 
+}
+
+const removeProject = (target) => {
+    let targetId = target.target.id.split('-')
+    let selectedProj = targetId[1]
+
+    homePage.projectList.forEach(element => {
+        if (element.id == selectedProj) {
+            let projIndex = homePage.projectList.indexOf(element)
+            homePage.projectList.splice(projIndex, 1)
+
+            let li = document.querySelector(`#${element.id}li`)
+            li.remove()
+            updateLocal()
+        }
+    });
 }
 
 export {Project, addProjectMenu, showProjectSide}

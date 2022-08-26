@@ -1,6 +1,6 @@
 import { homePage } from "./globalVar";
 import { addTaskMenu, removeTask } from "./Tasks";
-import { format } from "date-fns";
+import { format, compareAsc } from "date-fns";
 import { expandTaskModal } from "./modals";
 
 const findProject = (projectName) => {
@@ -28,7 +28,7 @@ const findProject = (projectName) => {
         
 
 
-        let eleName = element.getId()
+        let eleName = element.id
         if (eleName.match(projID)){
             console.log('match')
             displayProject(element)
@@ -255,7 +255,7 @@ const displayAddTaskIcon = () => {
         contentDiv.appendChild(addTaskDiv)
 }
 
-//working on currently
+
 const displayToday = (target) => {
 
     
@@ -313,7 +313,7 @@ const displayToday = (target) => {
         element.tasks.forEach(element => {
             console.log(element.dueDate, new Date())
             if (element.dueDate == format(new Date(), 'MM/dd/yyyy')){
-                console.log('tasks found')
+                // console.log('tasks found')
                 writeTasks(element)
             }
         });
@@ -324,4 +324,60 @@ const displayToday = (target) => {
 
 }
 
-export {displayProject, findProject, displayAddTaskIcon, displayToday}
+
+const displayUpcoming = (target) => {
+    const contentContainer = document.querySelector('.rightContentContainer')
+    contentContainer.textContent =''
+
+
+
+    const contentDiv = document.createElement('div')
+    contentDiv.classList.add('contentDiv')
+
+    const contentTitleDiv = document.createElement('div')
+    contentDiv.appendChild(contentTitleDiv)
+    
+
+    const contentTitle = document.createElement('h2')
+    contentTitle.setAttribute('id', 'contentTitle')
+    contentTitle.textContent = 'Upcoming'
+
+    
+
+    contentTitleDiv.appendChild(contentTitle)
+    contentDiv.appendChild(contentTitleDiv)
+    contentContainer.appendChild(contentDiv)
+
+    homePage.projectList.forEach(element => {
+        let eleId
+        if (document.querySelector(`#${element.id}`) != null){
+            eleId = document.querySelector(`#${element.id}`)
+            eleId.classList.remove('selected')
+
+            // console.log(eleId, 'removed')
+        }
+        element.tasks.forEach(element => {
+            if (compareAsc(new Date(element.dueDate), new Date()) == 1){
+
+            const subSectContainer = document.createElement('div')
+            subSectContainer.classList.add('subSectContainer')
+            contentDiv.appendChild(subSectContainer)
+
+            const subSectTitle = document.createElement('div')
+            subSectTitle.classList.add('subSectTitle')
+            subSectTitle.textContent = `${format(new Date(element.dueDate), 'MMM d eee')}`
+
+            subSectContainer.appendChild(subSectTitle)
+
+            contentDiv.appendChild(subSectContainer)
+
+            writeTasks(element)
+            }
+        });
+    });
+
+    target.target.classList.add('selected')
+
+}
+
+export {displayProject, findProject, displayAddTaskIcon, displayToday, displayUpcoming}

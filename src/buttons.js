@@ -1,7 +1,7 @@
 import { homePage } from "./globalVar"
 import { addMonths, subMonths, compareAsc, format, lastDayOfMonth, nextSaturday } from "date-fns"
 
-import { chooseComingWeekend, chooseNextWeek, chooseNoDate, chooseToday, chooseTomorrow } from "./calender"
+import { chooseComingWeekend, chooseDate, chooseNextWeek, chooseNoDate, chooseToday, chooseTomorrow } from "./calender"
 
 
 
@@ -42,7 +42,7 @@ const createProjDropBtn = () => {
     homePage.projectList.forEach(element => {
         if (element.title == selectedProj || element.id == selectedProj){
 
-            if (element.title == 'Today') {
+            if (element.title == 'Today' || element.title == 'Upcoming') {
                 dropBtnImg.setAttribute('src', `./svgs/sidebar_svgs/inbox-outline.svg`)
 
                 
@@ -116,7 +116,7 @@ const displayProjDrop = (event) => {
 
     homePage.projectList.forEach(element => {
 
-        if (element.title != 'Today'){
+        if (element.title != 'Today' && element.title !='Upcoming'){
         let li = document.createElement('li')
 
         let leftDiv = document.createElement('div')
@@ -297,6 +297,7 @@ const createCalender = (loc) => {
         }
        
         ydiv.textContent = `${y+1}`
+        ydiv.addEventListener('click', chooseDate)
         calenderBottom.appendChild(ydiv)
     }
 
@@ -372,6 +373,7 @@ const createCalender = (loc) => {
             
            
             ydiv.textContent = `${y+1}`
+            ydiv.addEventListener('click', chooseDate)
             calenderBottom.appendChild(ydiv)
         }
 
@@ -439,7 +441,7 @@ const createCalender = (loc) => {
         
                 }
                 
-               
+                ydiv.addEventListener('click', chooseDate)
                 ydiv.textContent = `${y+1}`
                 calenderBottom.appendChild(ydiv)
             }

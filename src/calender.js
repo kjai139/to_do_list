@@ -88,4 +88,26 @@ const chooseNoDate = () => {
 
 }
 
-export {chooseToday, chooseTomorrow, chooseNextWeek, chooseComingWeekend, chooseNoDate}
+const chooseDate = (target) => {
+
+    let dd = document.querySelector('#dueDateBtn')
+    let ddTxt = document.querySelector('#ddTxt')
+
+    let chosenD = target.target.textContent
+    let monthYear = document.querySelector('.monthYearDisplay').textContent.split(' ')
+    let chosenM = monthYear[0]
+    let chosenY = monthYear[1]
+
+    ddTxt.textContent = format(new Date(`${chosenM} ${chosenD}, ${chosenY}`), 'MM/dd/yyyy')
+
+    dd.value = format(new Date(`${chosenM} ${chosenD}, ${chosenY}`), 'MM/dd/yyyy')
+
+    let overlay2 = document.querySelector('.overlay2')
+    let calenderContainer = document.querySelector('.calenderContainer')
+
+    overlay2.remove()
+    calenderContainer.remove()
+
+}
+
+export {chooseToday, chooseTomorrow, chooseNextWeek, chooseComingWeekend, chooseNoDate, chooseDate}
