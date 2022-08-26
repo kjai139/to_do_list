@@ -187,8 +187,15 @@ const checkProjExist = () => {
         console.log(element.title, projN.value)
         if (element.title === projN.value){
             console.log('returning false')
-            projHelp.classList.add('invalid')
             projHelp.textContent = 'Project name already exists'
+            projHelp.classList.add('invalid')
+            
+            projN.classList.add('redBorder')
+            result = false
+        } else if (projN.value == ''){
+            projHelp.textContent = 'Please enter a project name'
+            projHelp.classList.add('invalid')
+            
             projN.classList.add('redBorder')
             result = false
         }
@@ -236,7 +243,20 @@ const addProjBtnF = (target) => {
         updateLocal()
         if (projArrow.classList.contains('toggleOn')){
                 let li = document.createElement('li')
+                li.setAttribute('id', `${newP.id}li`)
                 let btn = document.createElement('button')
+
+                let removeBtn = document.createElement('button')
+                let removeBtnImg = document.createElement('img')
+
+                removeBtnImg.classList.add('removeBtnImg')
+                removeBtnImg.setAttribute('src', './svgs/sidebar_svgs/trash.svg')
+                removeBtn.setAttribute('id', `r-${newP.id}`)
+                removeBtn.classList.add('projRemoveBtn')
+                removeBtn.appendChild(removeBtnImg)
+
+                removeBtn.addEventListener('click', removeProject)
+
 
                 btn.setAttribute('id', `${newP.id}`)
                 let btnDiv = document.createElement('div')
@@ -252,6 +272,7 @@ const addProjBtnF = (target) => {
                 btn.addEventListener('click', findProject)
                 btn.appendChild(btnDiv)
                 li.appendChild(btn)
+                li.appendChild(removeBtn)
         
                 projDisplay.appendChild(li)
 
@@ -261,15 +282,18 @@ const addProjBtnF = (target) => {
 
         
         closeProjModal()
-        let projExpand = document.querySelector('#Projects')
-        projExpand.click()
+        let projStatus = document.querySelector('#projArrow')
+
+        if (projStatus.classList.contains('toggleOn') == false){
+            let projExpand = document.querySelector('#Projects')
+            projExpand.click()
+
+        }
+        
 
     } else {
         target.preventDefault()
-        let helpMsg = document.querySelector('.help')
-
-        helpMsg.textContent = 'Please enter a project name'
-        helpMsg.classList.add('invalid')
+        
     }
 
     
@@ -352,6 +376,8 @@ const removeProject = (target) => {
     let targetId = target.target.id.split('-')
     let selectedProj = targetId[1]
 
+    let contentTitle = document.querySelector('#contentTitle').textContent
+
     homePage.projectList.forEach(element => {
         if (element.id == selectedProj) {
             let projIndex = homePage.projectList.indexOf(element)
@@ -361,6 +387,15 @@ const removeProject = (target) => {
             li.remove()
             checkItemCount()
             updateLocal()
+
+            if (element.title == contentTitle){
+                const contentContainer = document.querySelector('.rightContentContainer')
+                contentContainer.textContent =''
+            } else {
+                
+                let selectedSide = document.querySelector('.selected')
+                selectedSide.click()
+            }
         }
     });
 }

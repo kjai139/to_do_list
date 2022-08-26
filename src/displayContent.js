@@ -5,7 +5,7 @@ import { expandTaskModal } from "./modals";
 
 const findProject = (projectName) => {
     let projID = projectName.target.id
-    console.log('proj name id', projectName.target.id)
+    // console.log('proj name id', projectName.target.id)
 
     
 
@@ -17,7 +17,7 @@ const findProject = (projectName) => {
             eleId = document.querySelector(`#${element.id}`)
             eleId.classList.remove('selected')
 
-            console.log(eleId, 'removed')
+            // console.log(eleId, 'removed')
         }
         
 
@@ -30,7 +30,7 @@ const findProject = (projectName) => {
 
         let eleName = element.id
         if (eleName.match(projID)){
-            console.log('match')
+            // console.log('match')
             displayProject(element)
             projectName.target.classList.add('selected')
             return
@@ -38,6 +38,20 @@ const findProject = (projectName) => {
     });
 
     
+}
+
+const toggleMenu = () => {
+    let leftContentContainer = document.querySelector('.leftContentContainer')
+
+    let rightContentContainer = document.querySelector('.rightContentContainer')
+
+    if (leftContentContainer.classList.contains('hideSideBar') == true){
+        leftContentContainer.classList.remove('hideSideBar')
+        rightContentContainer.classList.remove('pushLeftMargin')
+    } else if (leftContentContainer.classList.contains('hideSideBar') == false){
+        leftContentContainer.classList.add('hideSideBar')
+        rightContentContainer.classList.add('pushLeftMargin')
+    }
 }
 
 //currently working on
@@ -348,7 +362,7 @@ const displayUpcoming = (target) => {
     contentDiv.appendChild(contentTitleDiv)
     contentContainer.appendChild(contentDiv)
 
-    let closestDate
+    
     let dateArray =[]
 
     homePage.projectList.forEach(element => {
@@ -419,4 +433,4 @@ const displayUpcoming = (target) => {
 
 }
 
-export {displayProject, findProject, displayAddTaskIcon, displayToday, displayUpcoming}
+export {displayProject, findProject, displayAddTaskIcon, displayToday, displayUpcoming, toggleMenu}

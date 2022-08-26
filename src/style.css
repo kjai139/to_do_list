@@ -504,6 +504,14 @@ input {
     transform:scale(0);
 }
 
+.hideSideBar {
+    visibility: hidden;
+}
+
+.pushLeftMargin {
+    margin-left: 0 !important;
+}
+
 
 
 .phaseout {
