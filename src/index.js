@@ -17,10 +17,10 @@ addProjBtn.addEventListener('click', addProjectMenu)
 const projDisplay = document.querySelector('#Projects')
 projDisplay.addEventListener('click', showProjectSide)
 
-const todayDisplay = document.querySelector('#todayBtn')
+const todayDisplay = document.querySelector('#today-btn')
 todayDisplay.addEventListener('click', displayToday)
 
-const upcomingDisplay = document.querySelector('#upcomingBtn')
+const upcomingDisplay = document.querySelector('#upcoming-btn')
 upcomingDisplay.addEventListener('click' , displayUpcoming)
 
 const clearBtn = document.querySelector('#clearBtn')
@@ -37,7 +37,7 @@ menuToggleBtn.addEventListener('click', toggleMenu)
 
 
 
-const inboxBtn = document.querySelector('#Inbox')
+const inboxBtn = document.querySelector('#Inbox-btn')
 
 
 

@@ -1,4 +1,6 @@
+import { isThisHour } from "date-fns"
 import { homePage } from "./globalVar"
+import { removeTask } from "./Tasks"
 
 const closeProjModal = (target) => {
     
@@ -26,8 +28,12 @@ const closeTaskModal =(target) => {
 const closeExpandModal = (target) => {
     let expandContainer = document.querySelector('.expandContainer')
     let overlay = document.querySelector('.overlayG')
-    expandContainer.remove()
-    overlay.remove()
+    expandContainer.classList.add('phaseout2')
+    expandContainer.addEventListener('transitionend', function() {
+        expandContainer.remove()
+        overlay.remove()
+    } )
+    
 }
 
 
@@ -36,7 +42,7 @@ const expandTaskModal = (target) => {
     
 
 
-    let projTitle = document.querySelector('#contentTitle').textContent
+    // let projTitle = document.querySelector('.contentTitle').title
     let selectedSplit = target.target.id.split('-')
     let selectedProj = selectedSplit[0]
     let selectedIndex = selectedSplit[1]
@@ -122,7 +128,10 @@ const expandTaskModal = (target) => {
     taskCheckInput.setAttribute('type', 'checkbox')
     taskCheckInput.setAttribute('name', `${selectedProj}-${selectedIndex}`)
     taskCheckInput.classList.add('checkbox')
-        // taskCheckInput.addEventListener('change', removeTask)
+    taskCheckInput.addEventListener('change', function(target) {
+        removeTask(target)
+        closeExpandModal()
+    })
 
     leftPartDiv.appendChild(taskCheckInput)
 
@@ -229,7 +238,7 @@ const expandTaskModal = (target) => {
 
 
     homePage.projectList.forEach(element => {
-        if (element.title == selectedProj){
+        if (element.id == selectedProj){
             projectImg.setAttribute('src', `${element.img}`)
             projectTxt.textContent = `${element.title}`
 

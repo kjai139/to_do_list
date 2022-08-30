@@ -188,7 +188,7 @@ class Task {
     const addTask = (element) => {
         let addT = document.querySelector('#addTaskForm')
         
-        let projLocation = document.querySelector('#dropBtnTxt').textContent
+        let projLocation = document.querySelector('.dropBtnTxt').id
 
         if (addT.checkValidity()){
             element.preventDefault()
@@ -204,7 +204,7 @@ class Task {
             
 
             homePage.projectList.forEach(element => {
-                if (element.title == projLocation) {
+                if (element.id == projLocation) {
                     addTask.id = `${element.tasks.length}`
 
                     // console.log(addTask.id)
@@ -216,20 +216,32 @@ class Task {
 
                     let selection = document.querySelector('.selected') !=null
 
+                    // true if not blank
+
+                    // console.log('selection', selection)
+
                     let selectedProj 
 
                     if (selection == false){
-                        selectedProj = document.querySelector('#contentTitle').textContent
+                        selectedProj = document.querySelector('.contentTitle').id
                         
                     } else {
-                        selectedProj = document.querySelector('.selected').id
+                        let selectedProjS = document.querySelector('.selected').id.split('-')
+
+                        selectedProj = selectedProjS[0]
                     }
 
                     
-                    if (selectedProj == element.id || selectedProj == element.title){
+                    if (selectedProj == element.id){
+                        console.log('displayproject triggered')
                         displayProject(element)
+                        
                         return
 
+                    } else {
+                        let refreshPointer = document.querySelector(`#${selectedProj}-btn`)
+
+                        refreshPointer.click()
                     }
                     
                 }
@@ -243,10 +255,6 @@ class Task {
     const removeTask = (target) => {
         
 
-        // if (selectedProj == 'Today') {
-            // selectedProj = document.querySelector
-        // }
-        let contentDiv = document.querySelector('.contentDiv')
 
         let selectedTask = target.target.name.split('-')
         let selectedProj = selectedTask[0]
@@ -258,7 +266,7 @@ class Task {
         // console.log(selectedTask, selectedDescription)
 
         homePage.projectList.forEach(element => {
-            if (element.title == selectedProj) {
+            if (element.id == selectedProj) {
                 // console.log('eletitle match selected proj')
                 element.tasks.forEach(ele => {
                     // console.log(ele)

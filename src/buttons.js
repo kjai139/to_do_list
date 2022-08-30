@@ -1,5 +1,5 @@
 import { homePage } from "./globalVar"
-import { addMonths, subMonths, compareAsc, format, lastDayOfMonth, nextSaturday } from "date-fns"
+import { addMonths, subMonths, compareAsc, format, lastDayOfMonth, nextSaturday, addMinutes } from "date-fns"
 
 import { chooseComingWeekend, chooseDate, chooseNextWeek, chooseNoDate, chooseToday, chooseTomorrow } from "./calender"
 
@@ -15,12 +15,13 @@ const createProjDropBtn = () => {
     let selectedProj 
 
     if (selection == false){
-        selectedProj = document.querySelector('#contentTitle').textContent
-        console.log(selectedProj)
+        selectedProj = document.querySelector('#contentTitle').id
+        // console.log(selectedProj)
         
     } else {
-        selectedProj = document.querySelector('.selected').id
-        console.log(selectedProj)
+        let selectedProjS = document.querySelector('.selected').id.split('-')
+        selectedProj = selectedProjS[0]
+        // console.log(selectedProj)
     }
 
     
@@ -29,7 +30,7 @@ const createProjDropBtn = () => {
     dropBtnDiv.classList.add('dropBtnDiv')
     
     let bTC = document.querySelector('.bottomTaskContainer')
-    console.log(bTC)
+    // console.log(bTC)
 
     const dropBtn = document.createElement('button')
     dropBtn.setAttribute('id', 'dropBtn')
@@ -46,7 +47,8 @@ const createProjDropBtn = () => {
                 dropBtnImg.setAttribute('src', `./svgs/sidebar_svgs/inbox-outline.svg`)
 
                 
-                dropBtnTxt.setAttribute('id', 'dropBtnTxt')
+                dropBtnTxt.setAttribute('id', `Inbox`)
+                dropBtnTxt.classList.add('dropBtnTxt')
                 dropBtnTxt.textContent = `Inbox`
             } else {
 
@@ -55,8 +57,8 @@ const createProjDropBtn = () => {
             
                 dropBtnImg.setAttribute('src', `${element.img}`)
 
-            
-                dropBtnTxt.setAttribute('id', 'dropBtnTxt')
+                dropBtnTxt.classList.add('dropBtnTxt')
+                dropBtnTxt.setAttribute('id', `${element.id}`)
                 dropBtnTxt.textContent = `${element.title}`
 
             }
@@ -90,6 +92,8 @@ const displayProjDrop = (event) => {
     // let parentDiv = document.querySelector('.dropBtnDiv')
 
     event.preventDefault()
+
+    let dropBtnTxt = document.querySelector('.dropBtnTxt')
 
     const projDropContainer = document.createElement('div')
     projDropContainer.classList.add('projectDropContainer')
@@ -150,10 +154,11 @@ const displayProjDrop = (event) => {
             let dropBtnImg = document.querySelector('#dropBtnImg')
             dropBtnImg.setAttribute('src', `${element.img}`)
 
-            let dropBtnTxt = document.querySelector('#dropBtnTxt')
+            let dropBtnTxt = document.querySelector('.dropBtnTxt')
             dropBtnTxt.textContent = `${element.title}`
+            dropBtnTxt.setAttribute('id', `${element.id}`)
 
-            console.log('li select')
+            // console.log('li select')
             projDropContainer.remove()
             overlay2.remove()
         })
@@ -283,7 +288,7 @@ const createCalender = (loc) => {
     let selectedMonth = displayMonthAndYear[0]
     let selectedYear = displayMonthAndYear[1]
 
-    console.log(month[curMonth], selectedMonth, curYear, selectedYear)
+    // console.log(month[curMonth], selectedMonth, curYear, selectedYear)
 
     for (let y = 0; y < lastDay; y++){
         let ydiv = document.createElement('div')
@@ -384,10 +389,10 @@ const createCalender = (loc) => {
 
     //prev month funct
     leftArrow.addEventListener('click', function leftA(){
-        console.log(compareAsc(todayDate, selectedDate))
-        if (compareAsc(todayDate, selectedDate) == -1 && month[selectedDate.getMonth()] > month[curMonth]){
-            console.log(todayDate)
-            console.log(selectedDate)
+        
+        if (compareAsc(addMinutes(todayDate, 1), selectedDate) == -1){
+            // console.log(todayDate)
+            // console.log(selectedDate)
             selectedDate = subMonths(selectedDate, 1)
 
             let selectedDateMinusOne = subMonths(selectedDate, 1)
@@ -634,11 +639,11 @@ const adjustDate = () => {
 
     if (selection == false){
         selectedProj = document.querySelector('#contentTitle').textContent
-        console.log(selectedProj)
+        // console.log(selectedProj)
         
     } else {
         selectedProj = document.querySelector('.selected').id
-        console.log(selectedProj)
+        // console.log(selectedProj)
     }
 }
 

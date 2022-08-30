@@ -4,22 +4,23 @@ import { format, compareAsc } from "date-fns";
 import { expandTaskModal } from "./modals";
 
 const findProject = (projectName) => {
-    let projID = projectName.target.id
+    let projIDs = projectName.target.id.split('-')
     // console.log('proj name id', projectName.target.id)
-
+    let projID = projIDs[0]
+    // console.log(projID)
     
 
     homePage.projectList.forEach(element => {
         // console.log(element.getName(),projID )
-        // console.log(element)
+        // console.log(element.id, 'eleid')
+        // console.log(document.querySelector(`#${element.id}-btn`))
         let eleId
-        if (document.querySelector(`#${element.id}`) != null){
-            eleId = document.querySelector(`#${element.id}`)
+        if (document.querySelector(`#${element.id}-btn`) != null){
+            eleId = document.querySelector(`#${element.id}-btn`)
             eleId.classList.remove('selected')
 
             // console.log(eleId, 'removed')
-        }
-        
+        } 
 
         
         
@@ -45,10 +46,12 @@ const toggleMenu = () => {
 
     let rightContentContainer = document.querySelector('.rightContentContainer')
 
-    if (leftContentContainer.classList.contains('hideSideBar') == true){
+    if (leftContentContainer.classList.contains('slideSideBarIn') == false){
         leftContentContainer.classList.remove('hideSideBar')
+        leftContentContainer.classList.add('slideSideBarIn')
         rightContentContainer.classList.remove('pushLeftMargin')
-    } else if (leftContentContainer.classList.contains('hideSideBar') == false){
+    } else if (leftContentContainer.classList.contains('slideSideBarIn') == true){
+        leftContentContainer.classList.remove('slideSideBarIn')
         leftContentContainer.classList.add('hideSideBar')
         rightContentContainer.classList.add('pushLeftMargin')
     }
@@ -107,7 +110,7 @@ const writeTasks = (element) => {
         let projName = element.projectName
 
         homePage.projectList.forEach(element => {
-            if (element.title == projName){
+            if (element.id == projName){
                 projIndicatorBtnImg.setAttribute('src', `${element.img}`)
                 projIndicatorBtnTxt.textContent = `${element.title}`
             }
@@ -167,7 +170,9 @@ const displayProject = (proj) => {
     
 
     const contentTitle = document.createElement('h2')
-    contentTitle.setAttribute('id', 'contentTitle')
+    contentTitle.classList.add('contentTitle')
+    contentTitle.setAttribute('id', `${proj.id}`)
+    
     contentTitle.textContent = `${proj.title}`
 
     contentTitleDiv.appendChild(contentTitle)
@@ -316,8 +321,8 @@ const displayToday = (target) => {
 
     homePage.projectList.forEach(element => {
         let eleId
-        if (document.querySelector(`#${element.id}`) != null){
-            eleId = document.querySelector(`#${element.id}`)
+        if (document.querySelector(`#${element.id}-btn`) != null){
+            eleId = document.querySelector(`#${element.id}-btn`)
             eleId.classList.remove('selected')
 
             // console.log(eleId, 'removed')
@@ -367,8 +372,8 @@ const displayUpcoming = (target) => {
 
     homePage.projectList.forEach(element => {
         let eleId
-        if (document.querySelector(`#${element.id}`) != null){
-            eleId = document.querySelector(`#${element.id}`)
+        if (document.querySelector(`#${element.id}-btn`) != null){
+            eleId = document.querySelector(`#${element.id}-btn`)
             eleId.classList.remove('selected')
 
             // console.log(eleId, 'removed')

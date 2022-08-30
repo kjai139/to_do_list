@@ -505,7 +505,13 @@ input {
 }
 
 .hideSideBar {
-    visibility: hidden;
+    transform:translateX(-100%);
+    transition: transform 0.25s ease;
+}
+
+.slideSideBarIn {
+    transform: translateX(0%);
+    transition: transform 0.25s ease;
 }
 
 .pushLeftMargin {
@@ -518,7 +524,14 @@ input {
     transform: scale(0);
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 0.5s, opacity 0.5s, transform 0.5s linear;
+    transition: visibility 0.5s, opacity 0.5s, transform 0.5s linear;
+}
+
+.phaseout2 {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.25s, opacity 0.5s, visibility 0.5s ease-out;
 }
 
 /* page content */

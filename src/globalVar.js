@@ -13,10 +13,10 @@ const findHome = () => {
         testInbox.img = './svgs/sidebar_svgs/inbox-outline.svg'
 
         const todayBox = new Project('Today')
-        todayBox.id = 'todayBtn'
+        todayBox.id = 'today'
 
         const upcoming = new Project('Upcoming')
-        upcoming.id = 'upcomingBtn'
+        upcoming.id = 'upcoming'
 
 
 

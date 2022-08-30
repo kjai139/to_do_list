@@ -258,7 +258,7 @@ const addProjBtnF = (target) => {
                 removeBtn.addEventListener('click', removeProject)
 
 
-                btn.setAttribute('id', `${newP.id}`)
+                btn.setAttribute('id', `${newP.id}-btn`)
                 let btnDiv = document.createElement('div')
         
                 let divImg = document.createElement('img')
@@ -333,7 +333,7 @@ const showProjectSide =() => {
 
 
 
-                btn.setAttribute('id', `${element.id}`)
+                btn.setAttribute('id', `${element.id}-btn`)
                 removeBtn.setAttribute('id', `r-${element.id}`)
                 removeBtn.classList.add('projRemoveBtn')
                 removeBtn.appendChild(removeBtnImg)
@@ -375,8 +375,13 @@ const showProjectSide =() => {
 const removeProject = (target) => {
     let targetId = target.target.id.split('-')
     let selectedProj = targetId[1]
+    let contentTitle
+    
+    if (document.querySelector('.contentTitle') != null ){
+        contentTitle = document.querySelector('.contentTitle').textContent
+    }
 
-    let contentTitle = document.querySelector('#contentTitle').textContent
+    
 
     homePage.projectList.forEach(element => {
         if (element.id == selectedProj) {
@@ -392,9 +397,12 @@ const removeProject = (target) => {
                 const contentContainer = document.querySelector('.rightContentContainer')
                 contentContainer.textContent =''
             } else {
+                if (document.querySelector('.selected') != null){
+                    let selectedSide = document.querySelector('.selected')
+                    selectedSide.click()
+
+                }
                 
-                let selectedSide = document.querySelector('.selected')
-                selectedSide.click()
             }
         }
     });
