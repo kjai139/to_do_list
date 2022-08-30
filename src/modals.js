@@ -92,6 +92,7 @@ const expandTaskModal = (target) => {
     let closeModalBtn = document.createElement('button')
     let closeModalImg = document.createElement('img')
     closeModalImg.setAttribute('src', './svgs/btn_svgs/close.svg')
+    closeModalBtn.addEventListener('click', closeExpandModal)
 
     closeModalBtn.appendChild(closeModalImg)
 
