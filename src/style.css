@@ -177,7 +177,12 @@ input {
     height: 100vh;
 }
     
-
+#profilePicIcon {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 27px;
+    width: 27px;
+}
 
 .sidebarContainer {
     display: flex;
@@ -858,4 +863,24 @@ input {
 
 .modalTaskName {
     font-size: 20px;
+}
+
+#signInBtn, #signOutBtn {
+    padding:4px;
+    font-family: var(--contentFont);
+    font-weight: bold;
+}
+
+#userNameDisplay {
+    font-family: var(--contentFont);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 4px;
+   
+}
+
+.noDisplay {
+    display: none !important;
 }
